@@ -1,0 +1,11 @@
+export const USER_LIST_ALL_URL = '/api/v1/users'
+export const USER_GET_BY_ID_URL = '/api/v1/users'
+export const USER_CREATE_URL = '/api/v1/users/create'
+export const USER_UPDATE_URL = '/api/v1/users/update'
+export const USER_DELETE_URL = '/api/v1/users/delete'
+
+export const FACILITY_CREATE_URL = '/api/v1/facilities/'
+export const FACILITY_DELETE_URL = '/api/v1/facilities/delete'
+export const FACILITY_GET_BY_ID_URL = '/api/v1/facilities'
+export const FACILITY_LIST_ALL_URL = '/api/v1/facilities'
+export const FACILITY_UPDATE_URL = '/api/v1/facilities'

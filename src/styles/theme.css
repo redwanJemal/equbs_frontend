@@ -1,0 +1,138 @@
+.light-theme {
+	--primary-color: #0773bb;
+	--secondary-color: #ffffff;
+	--background-color: #ffffff;
+	--text-color: #ffffff;
+	--card-text-color: #001529;
+	--selected-item-bg: #ffffff;
+	--selected-item-color: #0773bb;
+	--bg-danger: #ff0000;
+	--text-color-danger: #ffffff;
+	--bg-success: #52c41a;
+	--text-color-success: #ffffff;
+	--highlighted-row: #e6f7ff;
+	--table-row-hover: #fafafa;
+	--table-row-default: #333333;
+	--table-row-selected: #e2f3ff;
+}
+
+.dark-theme {
+	--primary-color: #001529;
+	--secondary-color: #393939;
+	--background-color: #393939;
+	--text-color: #ffffff;
+	--card-text-color: #ffffff;
+	--selected-item-color: #ffffff;
+	--selected-item-bg: #0b2c4b;
+	--bg-danger: #ff0000;
+	--text-color-danger: #ffffff;
+	--highlighted-row: #e6f7ff;
+	--table-row-default: #fff;
+	--table-row-hover: #fafafa;
+	--table-row-selected: #001529;
+}
+
+.card-bg {
+}
+
+.icon-color {
+	color: var(--primary-color) !important;
+}
+
+.text-color {
+	color: var(--primary-color) !important;
+}
+
+.ant-layout {
+	background: var(--background-color) !important;
+}
+
+.ant-layout-header {
+	background: var(--secondary-color) !important;
+}
+
+.ant-layout-footer {
+	background: var(--primary-color) !important;
+}
+
+.ant-drawer-content {
+	background: var(--primary-color) !important;
+}
+.add-edit-drawer {
+	background: var(--secondary-color) !important;
+}
+
+.ant-layout-sider {
+	background: var(--primary-color) !important;
+}
+
+.ant-menu {
+	background: var(--primary-color) !important;
+}
+
+.ant-layout-content {
+	background: var(--secondary-color) !important;
+	color: var(--text-color) !important;
+}
+
+.ant-card {
+	background: var(--secondary-color) !important;
+	color: var(--card-text-color) !important;
+}
+
+.ant-btn-primary {
+	background-color: var(--primary-color) !important;
+	border-color: var(--primary-color) !important;
+}
+
+.ant-menu-submenu-title,
+.ant-menu-item {
+	color: var(--text-color) !important;
+}
+
+.ant-menu-item-selected {
+	background-color: var(--selected-item-bg) !important;
+	color: var(--selected-item-color) !important;
+	border-color: var(--secondary-color) !important;
+}
+
+.ant-switch-checked {
+	background-color: var(--primary-color) !important;
+}
+
+.table-row-color {
+	color: var(--table-row-default) !important;
+}
+
+.table-row-hover:hover {
+	background-color: var(--table-row-hover) !important;
+}
+
+.highlighted-row {
+	background-color: var(--highlighted-row) !important;
+	transition: background-color 0.5s ease;
+}
+
+.ant-table-row.ant-table-row-selected > .ant-table-cell {
+	background: var(--table-row-selected) !important;
+}
+
+.erf-danger-bg:hover {
+	background: var(--bg-danger) !important;
+}
+
+.erf-danger-color:hover {
+	color: var(--text-color-danger) !important;
+}
+
+.erf-success-bg:hover {
+	background: var(--bg-success) !important;
+}
+
+.erf-success-color:hover {
+	color: var(--text-color-success) !important;
+}
+
+.card-text {
+	color: var(--card-text-color) !important;
+}

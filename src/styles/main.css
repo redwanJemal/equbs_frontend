@@ -1,0 +1,67 @@
+html,
+body,
+#root,
+#root > * {
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	font-size: 14px;
+}
+
+a {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#searchForm > .ant-row > .ant-row.ant-form-item {
+	width: 100%;
+	text-align: right;
+	padding-right: 12px;
+}
+
+#searchForm > .ant-row > .ant-row.ant-form-item .ant-col {
+	flex: 1;
+	max-width: 100%;
+	width: 100%;
+}
+
+#searchForm > .ant-row > .ant-row.ant-form-item .ant-col .ant-btn:first-child {
+	margin-right: 10px;
+}
+
+.app-loading-wrapper.ant-spin-spinning {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.sider-large {
+	max-width: 250px !important;
+	min-width: 250px !important;
+	width: 250px !important;
+}
+.ant-input {
+	padding-top: 0.25rem !important;
+	padding-bottom: 0.25rem !important;
+}
+
+.ant-input-affix-wrapper {
+	padding: 1px 11px !important;
+}
+.table-container {
+	overflow: hidden; /* Hide scrollbars for the container */
+	position: relative; /* Ensure the container is positioned correctly */
+}
+.ant-table-body {
+	overflow-y: scroll !important;
+	max-height: 490px !important;
+}
