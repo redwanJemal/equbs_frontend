@@ -25,7 +25,8 @@ const DynamicFormComponent = ({
 	formik,
 	isLoading = false,
 	actionButton = null,
-	initialValues, // New prop for initial values
+	hideSubmitForm = false,
+	initialValues,
 }) => {
 	const renderField = (field) => {
 		switch (field.type) {
@@ -73,13 +74,15 @@ const DynamicFormComponent = ({
 				))}
 			</Row>
 			<Form.Item>
-				<Button
-					type='primary'
-					htmlType='submit'
-					disabled={isLoading || !isFormDirty}
-				>
-					{isLoading ? <Spin /> : 'Submit'}
-				</Button>
+				{!hideSubmitForm && (
+					<Button
+						type='primary'
+						htmlType='submit'
+						disabled={isLoading || !isFormDirty}
+					>
+						{isLoading ? <Spin /> : 'Submit'}
+					</Button>
+				)}
 				{actionButton}
 			</Form.Item>
 		</Form>
@@ -91,6 +94,7 @@ DynamicFormComponent.propTypes = {
 	formik: PropTypes.object.isRequired,
 	isLoading: PropTypes.bool,
 	actionButton: PropTypes.node,
+	hideSubmitForm: PropTypes.object.isRequired,
 	initialValues: PropTypes.object.isRequired, // Add prop type for initial values
 }
 
