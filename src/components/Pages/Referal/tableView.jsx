@@ -3,13 +3,14 @@
 import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
 import { Button, Dropdown, Menu, Tag, Tooltip } from 'antd'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
+import { InfoCircleOutlined } from '@ant-design/icons'
 
-const referralOutTableView = ({ list, onDetail, onDelete, onReactivate }) => {
+const referralOutTableView = ({ list, onDetail, onFeedback, onReactivate }) => {
 	const handleMenuClick = (item, action) => {
 		if (action === 'detail') {
 			onDetail(item?.id)
-		} else if (action === 'delete') {
-			onDelete(item?.id)
+		} else if (action === 'feedback') {
+			onFeedback(item?.id)
 		} else if (action === 'reactive') {
 			onReactivate(item?.id)
 		}
@@ -19,10 +20,19 @@ const referralOutTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 		list: list,
 		theme: {
 			status: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[100px]'>
-					{item?.status === 'Pending' && <Tag color='orange'>Pending</Tag>}
-					{item?.status === 'Accepted' && <Tag color='green'>Accepted</Tag>}
-					{item?.status === 'Rejected' && <Tag color='red'>Rejected</Tag>}
+				<div className='flex gap-2'>
+					<div className='table-row-color text-sm leading-[18px]'>
+						{item?.status === 'Pending' && <Tag color='orange'>Pending</Tag>}
+						{item?.status === 'Accepted' && <Tag color='green'>Accepted</Tag>}
+						{item?.status === 'Rejected' && <Tag color='red'>Rejected</Tag>}
+					</div>
+					<Tooltip title='Rejection Feedback'>
+						{item?.status === 'Rejected' && (
+							<InfoCircleOutlined
+								onClick={() => handleMenuClick(item, 'feedback')}
+							/>
+						)}
+					</Tooltip>
 				</div>
 			),
 			facilityName: (item) => (

@@ -33,13 +33,15 @@ const DataTable = ({
 	selectedData,
 	confirmDelete,
 	setConfirmDelete,
-	actionOptions,
-	filterOptions,
-	sortOptions,
+	actionOptions = null,
+	filterOptions = null,
+	sortOptions = null,
 	onFilterApply,
 	onActionSelected,
 	onSortApply,
 	title,
+	addText = 'Add',
+	showAdd = true,
 	itemToDelete,
 	setItemToDelete,
 	DrawerComponent,
@@ -101,44 +103,52 @@ const DataTable = ({
 						onChange={handleSearchChange}
 						suffix={<SearchOutlined onClick={handleSearchClick} />}
 					/>
-					<Button
-						icon={<PlusCircleOutlined />}
-						onClick={() => setOpenDrawer(true)}
-					>
-						Add
-					</Button>
-					<Dropdown
-						overlay={
-							<ActionDropDown
-								actions={actionOptions}
-								onActionSelected={(action) =>
-									onActionSelected(action, selectedItems)
-								}
-							/>
-						}
-					>
-						<Button icon={<FaShieldAlt />}>Actions</Button>
-					</Dropdown>
-					<Dropdown
-						overlay={
-							<ActionDropDown
-								actions={sortOptions}
-								onActionSelected={onSortApply}
-							/>
-						}
-					>
-						<Button icon={<SortAscendingOutlined />}>Sort</Button>
-					</Dropdown>
-					<Dropdown
-						overlay={
-							<ActionDropDown
-								actions={filterOptions}
-								onActionSelected={onFilterApply}
-							/>
-						}
-					>
-						<Button icon={<FilterOutlined />}>Filters</Button>
-					</Dropdown>
+					{showAdd && (
+						<Button
+							icon={<PlusCircleOutlined />}
+							onClick={() => setOpenDrawer(true)}
+						>
+							{addText}
+						</Button>
+					)}
+					{actionOptions && (
+						<Dropdown
+							overlay={
+								<ActionDropDown
+									actions={actionOptions}
+									onActionSelected={(action) =>
+										onActionSelected(action, selectedItems)
+									}
+								/>
+							}
+						>
+							<Button icon={<FaShieldAlt />}>Actions</Button>
+						</Dropdown>
+					)}
+					{sortOptions && (
+						<Dropdown
+							overlay={
+								<ActionDropDown
+									actions={sortOptions}
+									onActionSelected={onSortApply}
+								/>
+							}
+						>
+							<Button icon={<SortAscendingOutlined />}>Sort</Button>
+						</Dropdown>
+					)}
+					{filterOptions && (
+						<Dropdown
+							overlay={
+								<ActionDropDown
+									actions={filterOptions}
+									onActionSelected={onFilterApply}
+								/>
+							}
+						>
+							<Button icon={<FilterOutlined />}>Filters</Button>
+						</Dropdown>
+					)}
 				</Space>
 			</div>
 			<DynamicTable

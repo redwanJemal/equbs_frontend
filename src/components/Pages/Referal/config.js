@@ -238,7 +238,7 @@ export const referralOutColumnsConfig = [
 		width: 100,
 	},
 	{
-		title: 'Status',
+		title: '',
 		dataIndex: 'status',
 		key: 'status',
 		responsive: ['sm', 'md', 'lg'],

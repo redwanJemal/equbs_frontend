@@ -16,8 +16,11 @@ const CreateFacility = createAsyncThunk(
 	async ({ payload }, { rejectWithValue }) => {
 		try {
 			const response = await api.CreateFacility(payload)
-			const data = response.data
+			const data = payload
 			const status = response.status
+			if (status === 204 || status === 200) {
+				data['id'] = response.data
+			}
 			return { data, status }
 		} catch (err) {
 			return rejectWithValue(err.response.data)
@@ -44,7 +47,7 @@ const UpdateFacility = createAsyncThunk(
 	async ({ id, payload }, { rejectWithValue }) => {
 		try {
 			const response = await api.UpdateFacility({ id, payload })
-			const data = response.data
+			const data = payload
 			const status = response.status
 			return { data, status }
 		} catch (err) {

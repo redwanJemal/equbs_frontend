@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, message } from 'antd'
+import { Button, Modal, message } from 'antd'
 import { buildQueryString } from '@/utils/buildQueryString'
 import { openDrawer } from '@/stores/drawerSlice'
 import {
@@ -122,6 +123,7 @@ const ReferralOutPage = () => {
 	})
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
+	const [modalOpen, setModalOpen] = useState(false)
 
 	useEffect(() => {
 		dispatch(GetAllFacilities(buildQueryString(queryParameters)))
@@ -141,6 +143,11 @@ const ReferralOutPage = () => {
 		} else {
 			message.error('Failed to get facility detail')
 		}
+	}
+
+	const handleFeedback = (id) => {
+		console.log('Feedback for ID:', id)
+		setModalOpen(true)
 	}
 
 	const handleDelete = async (id) => {
@@ -224,11 +231,12 @@ const ReferralOutPage = () => {
 	return (
 		<>
 			<DataTable
+				addText={'Create Referal'}
 				pageId={'referralOuts'}
 				data={sampleData}
 				config={referralOutTableView({
 					list: sampleData,
-					onDelete: confirmDeletion,
+					onFeedback: handleFeedback,
 					onDetail: handleDetail,
 					onReactivate: confirmReactivation,
 				})}
@@ -262,6 +270,18 @@ const ReferralOutPage = () => {
 				highlightedRowId={highlightedRowId}
 				DrawerComponent={ReferralOutAddEditDrawer}
 			/>
+			<Modal
+				title='Feedback'
+				centered
+				open={modalOpen}
+				onOk={() => setModalOpen(false)}
+				onCancel={() => setModalOpen(false)}
+				width={1000}
+			>
+				<p>Some contents...</p>
+				<p>Some contents...</p>
+				<p>Some contents...</p>
+			</Modal>
 		</>
 	)
 }

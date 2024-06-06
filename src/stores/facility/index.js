@@ -66,9 +66,9 @@ const facilitySlice = createSlice({
 				state.loading = 'pending'
 			})
 			.addCase(CreateFacility.fulfilled, (state, action) => {
-				state.facilities.unshift(action.payload.data.data)
+				state.facilities.unshift(action.payload.data)
 				state.loading = 'idle'
-				state.highlightedRowId = action.payload.data.data.id
+				state.highlightedRowId = action.payload.data.id
 			})
 			.addCase(CreateFacility.rejected, (state, action) => {
 				state.loading = 'idle'
@@ -78,7 +78,8 @@ const facilitySlice = createSlice({
 				state.loading = 'pending'
 			})
 			.addCase(UpdateFacility.fulfilled, (state, action) => {
-				const updatedFacility = action.payload.data.data
+				const updatedFacility = action.payload.data
+				console.log(action.payload)
 				state.facilities = state.facilities.map((facility) =>
 					facility.id === updatedFacility.id ? updatedFacility : facility
 				)

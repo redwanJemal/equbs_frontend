@@ -22,6 +22,7 @@ const referralInTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			status: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[100px]'>
 					<EyeOutlined
+						onClick={() => handleMenuClick(item, 'detail')}
 						style={{
 							fontSize: 20,
 						}}

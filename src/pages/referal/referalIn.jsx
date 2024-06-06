@@ -136,13 +136,15 @@ const ReferraInPage = () => {
 
 	const handleDetail = async (id) => {
 		console.log('Detail for ID is:', id)
-		const response = await dispatch(GetFacilityById({ id }))
-		if (!response.error) {
-			setSelectedData(response.payload.data.data)
-			dispatch(openDrawer())
-		} else {
-			message.error('Failed to get facility detail')
-		}
+		dispatch(openDrawer())
+
+		// const response = await dispatch(GetFacilityById({ id }))
+		// if (!response.error) {
+		// 	setSelectedData(response.payload.data.data)
+		// 	dispatch(openDrawer())
+		// } else {
+		// 	message.error('Failed to get facility detail')
+		// }
 	}
 
 	const handleDelete = async (id) => {
@@ -245,22 +247,15 @@ const ReferraInPage = () => {
 				openDrawer={isOpenDrawer}
 				setOpenDrawer={() => dispatch(openDrawer())}
 				selectedData={selectedData}
-				actionOptions={[
-					{ name: 'Delete', value: 'delete' },
-					{ name: 'Detail', value: 'detail' },
-				]}
 				filterOptions={[
 					{ name: 'Listing Type', value: 'listing_type' },
 					{ name: 'Availability', value: 'availability' },
-				]}
-				sortOptions={[
-					{ name: 'Name Ascending', value: 'name_asc' },
-					{ name: 'Name Descending', value: 'name_desc' },
 				]}
 				onActionSelected={onActionSelected}
 				onFilterApply={onFilterApply}
 				onSortApply={onSortApply}
 				title={'Referral Ins'}
+				showAdd={false}
 				highlightedRowId={highlightedRowId}
 				DrawerComponent={ReferralInDetail}
 			/>

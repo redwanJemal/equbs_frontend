@@ -72,10 +72,10 @@ const FacilityPage = () => {
 
 	const confirmDeletion = (id) => {
 		Modal.confirm({
-			title: 'Are you sure you want to delete this facility?',
+			title: 'Are you sure you want to deactivate this facility?',
 			content: 'This action cannot be undone.',
 			onOk: () => handleDelete(id),
-			onCancel: () => console.log('Deletion cancelled'),
+			onCancel: () => console.log('Deactivation cancelled'),
 		})
 	}
 

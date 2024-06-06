@@ -56,12 +56,13 @@ const FacilityAddEditDrawer = () => {
 			if (isEditMode) {
 				payload.id = id
 			}
-			console.log(payload)
 			const response = await dispatch(action({ id, payload }))
 			if (response.error) {
-				message.error(response.payload.message)
+				message.error(`Failed to ${isEditMode ? 'Update' : 'Create'} Facility`)
 			} else {
-				message.success(response.payload.data.message)
+				message.success(
+					`Succedded on ${isEditMode ? 'Updating' : 'Creating'} Facility`
+				)
 				formik.resetForm()
 				dispatch(resetSelectedFacility())
 				dispatch(closeDrawer())
