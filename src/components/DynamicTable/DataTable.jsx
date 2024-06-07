@@ -15,6 +15,7 @@ import Pagination from './CustomPagination'
 import ActionDropDown from './ActionDropDown'
 import { FaShieldAlt } from 'react-icons/fa'
 import DynamicTable from '.'
+import FilterComponent from '../FilterComponent'
 
 const { confirm } = Modal
 
@@ -52,6 +53,9 @@ const DataTable = ({
 	const [isConfirmModalVisible, setIsConfirmModalVisible] =
 		useState(confirmDelete)
 	const [selectedItems, setSelectedItems] = useState([]) // To store selected items
+	const [selectedCategories, setSelectedCategories] = useState([])
+	const [selectedStatuses, setSelectedStatuses] = useState([])
+
 	const dispatch = useDispatch()
 
 	const handleSearchChange = (e) => {
@@ -90,6 +94,30 @@ const DataTable = ({
 
 	const handleSelectChange = (selectedRowKeys, selectedRows) => {
 		setSelectedItems(selectedRows)
+	}
+
+	const handleCategoryChange = (checkedValues) => {
+		setSelectedCategories(checkedValues)
+	}
+
+	const handleStatusChange = (checkedValues) => {
+		setSelectedStatuses(checkedValues)
+	}
+
+	const handleApplyFilters = () => {
+		onFilterApply({
+			categories: selectedCategories,
+			statuses: selectedStatuses,
+		})
+	}
+
+	const handleResetFilters = () => {
+		setSelectedCategories([])
+		setSelectedStatuses([])
+		onFilterApply({
+			categories: [],
+			statuses: [],
+		})
 	}
 
 	return (
@@ -137,18 +165,14 @@ const DataTable = ({
 							<Button icon={<SortAscendingOutlined />}>Sort</Button>
 						</Dropdown>
 					)}
-					{filterOptions && (
-						<Dropdown
-							overlay={
-								<ActionDropDown
-									actions={filterOptions}
-									onActionSelected={onFilterApply}
-								/>
-							}
-						>
-							<Button icon={<FilterOutlined />}>Filters</Button>
-						</Dropdown>
-					)}
+					<FilterComponent
+						categories={filterOptions?.categories || []}
+						onCategoryChange={handleCategoryChange}
+						statusOptions={filterOptions?.statuses || []}
+						onStatusChange={handleStatusChange}
+						onApplyFilters={handleApplyFilters}
+						onResetFilters={handleResetFilters}
+					/>
 				</Space>
 			</div>
 			<DynamicTable

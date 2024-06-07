@@ -17,6 +17,7 @@ import DataTable from '@/components/DynamicTable/DataTable'
 import referralOutTableView from '@/components/Pages/Referal/tableView'
 import ReferralOutAddEditDrawer from '@/components/Pages/Referal/referral-addEdit'
 import { referralOutColumnsConfig } from '@/components/Pages/Referal/config'
+import FilterComponent from '@/components/FilterComponent'
 
 const sampleData = [
 	{
@@ -24,90 +25,100 @@ const sampleData = [
 		firstName: 'Alemu',
 		lastName: 'Gebre',
 		cardNumber: '12345',
-		referralTypeId: 1,
 		reasonForReferral: 'Routine Checkup',
 		status: 'Pending',
+		category: 'General',
+		referralTypeId: 1,
 	},
 	{
 		facilityName: 'Gondar General Hospital',
 		firstName: 'Fatima',
 		lastName: 'Mohammed',
 		cardNumber: '67890',
-		referralTypeId: 2,
 		reasonForReferral: 'Emergency Surgery',
 		status: 'Accepted',
+		category: 'Emergency',
+		referralTypeId: 2,
 	},
 	{
 		facilityName: 'Bahir Dar Clinic',
 		firstName: 'Hassan',
 		lastName: 'Ahmed',
 		cardNumber: '54321',
-		referralTypeId: 1,
 		reasonForReferral: 'Follow-up Visit',
 		status: 'Rejected',
+		category: 'General',
+		referralTypeId: 1,
 	},
 	{
 		facilityName: 'Adama Medical Center',
 		firstName: 'Sara',
 		lastName: 'Ali',
 		cardNumber: '98765',
-		referralTypeId: 2,
 		reasonForReferral: 'Severe Injury',
 		status: 'Pending',
+		category: 'Emergency',
+		referralTypeId: 2,
 	},
 	{
 		facilityName: 'Mekele Health Institute',
 		firstName: 'Abdi',
 		lastName: 'Nur',
 		cardNumber: '11223',
-		referralTypeId: 1,
 		reasonForReferral: 'Regular Checkup',
 		status: 'Accepted',
+		category: 'General',
+		referralTypeId: 1,
 	},
 	{
 		facilityName: 'Hawassa Regional Hospital',
 		firstName: 'Muna',
 		lastName: 'Ibrahim',
 		cardNumber: '44556',
-		referralTypeId: 2,
 		reasonForReferral: 'Accident',
 		status: 'Rejected',
+		category: 'Emergency',
+		referralTypeId: 1,
 	},
 	{
 		facilityName: 'Jimma Health Center',
 		firstName: 'Yusuf',
 		lastName: 'Mohammed',
 		cardNumber: '33445',
-		referralTypeId: 1,
 		reasonForReferral: 'Routine Checkup',
 		status: 'Pending',
+		category: 'General',
+		referralTypeId: 1,
 	},
 	{
 		facilityName: 'Dire Dawa Clinic',
 		firstName: 'Leyla',
 		lastName: 'Ahmed',
 		cardNumber: '55667',
-		referralTypeId: 2,
 		reasonForReferral: 'Severe Illness',
 		status: 'Accepted',
+		category: 'Emergency',
+		referralTypeId: 2,
 	},
 	{
 		facilityName: 'Harar General Hospital',
 		firstName: 'Aisha',
 		lastName: 'Ali',
 		cardNumber: '77889',
-		referralTypeId: 1,
 		reasonForReferral: 'Pregnancy Checkup',
 		status: 'Rejected',
+		category: 'General',
+		referralTypeId: 1,
 	},
 	{
 		facilityName: 'Awassa Health Center',
 		firstName: 'Omar',
 		lastName: 'Abdullah',
 		cardNumber: '99000',
-		referralTypeId: 2,
 		reasonForReferral: 'Emergency Case',
 		status: 'Pending',
+		category: 'Emergency',
+		referralTypeId: 1,
 	},
 ]
 
@@ -121,9 +132,9 @@ const ReferralOutPage = () => {
 		sortBy: '',
 		sortOrder: '',
 	})
+	const [filteredData, setFilteredData] = useState(sampleData)
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
-	const [modalOpen, setModalOpen] = useState(false)
 
 	useEffect(() => {
 		dispatch(GetAllFacilities(buildQueryString(queryParameters)))
@@ -133,6 +144,7 @@ const ReferralOutPage = () => {
 		(state) => state.facilities
 	)
 	const isOpenDrawer = useSelector((state) => state.drawer.isOpen)
+	const [modalOpen, setModalOpen] = useState(false)
 
 	const handleDetail = async (id) => {
 		console.log('Detail for ID is:', id)
@@ -145,8 +157,7 @@ const ReferralOutPage = () => {
 		}
 	}
 
-	const handleFeedback = (id) => {
-		console.log('Feedback for ID:', id)
+	const handleFeedback = async (id) => {
 		setModalOpen(true)
 	}
 
@@ -154,13 +165,13 @@ const ReferralOutPage = () => {
 		console.log('Delete ID:', id)
 		const response = await dispatch(DeleteFacility(id))
 		if (response?.payload?.status == 204) {
-			message.success('Facility Diactivation success')
+			message.success('Facility Deactivation success')
 		} else {
-			message.error('Facility Diactivation Failed')
+			message.error('Facility Deactivation Failed')
 		}
 	}
 
-	const handleRactivation = async (id) => {
+	const handleReactivation = async (id) => {
 		console.log('reactivate facility with id =>', id)
 		const response = await dispatch(ReactivateFacility(id))
 		if (response?.payload?.status == 204) {
@@ -184,13 +195,26 @@ const ReferralOutPage = () => {
 		Modal.confirm({
 			title: 'Are you sure you want to reactivate this facility?',
 			content: 'This action cannot be undone.',
-			onOk: () => handleRactivation(id),
+			onOk: () => handleReactivation(id),
 			onCancel: () => console.log('reactivate cancelled'),
 		})
 	}
 
-	const onFilterApply = (item) => {
-		console.log('Filter applied:', item)
+	const onFilterApply = (filters) => {
+		const filtered = sampleData.filter(
+			(item) =>
+				(filters.categories.length === 0 ||
+					filters.categories.includes(
+						item.referralTypeId === 1 ? 'Cold' : 'Emergency'
+					)) &&
+				(filters.statuses.length === 0 ||
+					filters.statuses.includes(item.status))
+		)
+		setFilteredData(filtered)
+		setQueryParameters((prev) => ({
+			...prev,
+			filters,
+		}))
 	}
 
 	const confirmBulkDeletion = (selectedItems) => {
@@ -228,14 +252,19 @@ const ReferralOutPage = () => {
 		})
 	}
 
+	const filterOptions = {
+		categories: ['Cold', 'Emergency'],
+		statuses: ['Pending', 'Accepted', 'Rejected'],
+	}
+
 	return (
 		<>
 			<DataTable
-				addText={'Create Referal'}
+				addText={'Create Referral'}
 				pageId={'referralOuts'}
-				data={sampleData}
+				data={filteredData}
 				config={referralOutTableView({
-					list: sampleData,
+					list: filteredData,
 					onFeedback: handleFeedback,
 					onDetail: handleDetail,
 					onReactivate: confirmReactivation,
@@ -255,10 +284,7 @@ const ReferralOutPage = () => {
 					{ name: 'Delete', value: 'delete' },
 					{ name: 'Detail', value: 'detail' },
 				]}
-				filterOptions={[
-					{ name: 'Listing Type', value: 'listing_type' },
-					{ name: 'Availability', value: 'availability' },
-				]}
+				filterOptions={filterOptions}
 				sortOptions={[
 					{ name: 'Name Ascending', value: 'name_asc' },
 					{ name: 'Name Descending', value: 'name_desc' },
