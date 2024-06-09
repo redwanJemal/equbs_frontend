@@ -3,13 +3,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Modal, message } from 'antd'
-import { buildQueryString } from '@/utils/buildQueryString'
 import { openDrawer } from '@/stores/drawerSlice'
 import {
 	DeleteFacility,
 	GetAllFacilities,
 	GetFacilityById,
 	ReactivateFacility,
+	setQueryParameters,
 } from '@/stores/facility'
 import { facilityColumnsConfig } from '@/components/Pages/Facility/config'
 import FacilityAddEditDrawer from '@/components/Pages/Facility/FacilityAddEditDrawer'
@@ -17,25 +17,16 @@ import DataTable from '@/components/DynamicTable/DataTable'
 import FacilityTableView from '@/components/Pages/Facility/tableView'
 
 const FacilityPage = () => {
-	const [queryParameters, setQueryParameters] = useState({
-		page: 1,
-		limit: 10,
-		filters: {},
-		include: 'facilityType',
-		term: '',
-		sortBy: '',
-		sortOrder: '',
-	})
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
 
 	useEffect(() => {
-		dispatch(GetAllFacilities(buildQueryString(queryParameters)))
-	}, [dispatch, queryParameters])
+		// Dispatch the setQueryParameters action on initial load
+		dispatch(setQueryParameters({ page: 1, pageSize: 10 }))
+	}, [dispatch])
 
-	const { facilities, loading, meta, highlightedRowId } = useSelector(
-		(state) => state.facilities
-	)
+	const { facilities, loading, meta, highlightedRowId, queryParameters } =
+		useSelector((state) => state.facilities)
 	const isOpenDrawer = useSelector((state) => state.drawer.isOpen)
 
 	const handleDetail = async (id) => {
@@ -53,9 +44,9 @@ const FacilityPage = () => {
 		console.log('Delete ID:', id)
 		const response = await dispatch(DeleteFacility(id))
 		if (response?.payload?.status == 204) {
-			message.success('Facility Diactivation success')
+			message.success('Facility Deactivation success')
 		} else {
-			message.error('Facility Diactivation Failed')
+			message.error('Facility Deactivation Failed')
 		}
 	}
 
@@ -84,7 +75,7 @@ const FacilityPage = () => {
 			title: 'Are you sure you want to reactivate this facility?',
 			content: 'This action cannot be undone.',
 			onOk: () => handleRactivation(id),
-			onCancel: () => console.log('reactivate cancelled'),
+			onCancel: () => console.log('Reactivation cancelled'),
 		})
 	}
 
@@ -117,14 +108,21 @@ const FacilityPage = () => {
 
 	const handleSearch = (searchValue) => {
 		console.log('Search value:', searchValue)
+		dispatch(
+			setQueryParameters({
+				...queryParameters,
+				term: searchValue,
+			})
+		)
 	}
 
 	const onPaginateApply = async (newPageNumber) => {
-		console.log('Paginate to page:', newPageNumber)
-		setQueryParameters({
-			...queryParameters,
-			page: newPageNumber,
-		})
+		dispatch(
+			setQueryParameters({
+				...queryParameters,
+				page: newPageNumber,
+			})
+		)
 	}
 
 	return (

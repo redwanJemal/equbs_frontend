@@ -15,6 +15,15 @@ const initialState = {
 	selectedFacility: null,
 	highlightedRowId: null,
 	error: null,
+	queryParameters: {
+		page: 1,
+		limit: 10,
+		filters: {},
+		include: 'facilityType',
+		term: '',
+		sortBy: '',
+		sortOrder: '',
+	},
 	meta: {
 		limit: 10,
 		page: 1,
@@ -25,8 +34,10 @@ const facilitySlice = createSlice({
 	name: 'facility',
 	initialState,
 	reducers: {
+		setQueryParameters(state, action) {
+			state.queryParameters = { ...state.queryParameters, ...action.payload }
+		},
 		resetSelectedFacility(state) {
-			console.log('setting selected facility')
 			state.selectedFacility = null
 		},
 		resetHighlightedRow(state) {
@@ -40,7 +51,7 @@ const facilitySlice = createSlice({
 			})
 			.addCase(GetAllFacilities.fulfilled, (state, action) => {
 				state.facilities = action.payload.data.items
-				state.meta = [] //action.payload.data.result.meta
+				state.meta = action.payload.data.meta
 				state.loading = 'idle'
 			})
 			.addCase(GetAllFacilities.rejected, (state, action) => {
@@ -52,7 +63,6 @@ const facilitySlice = createSlice({
 				state.detailLoading = 'pending'
 			})
 			.addCase(GetFacilityById.fulfilled, (state, action) => {
-				console.log(action.payload.data)
 				state.selectedFacility = action.payload.data
 				state.detailLoading = 'idle'
 				state.loading = 'idle'
@@ -79,7 +89,6 @@ const facilitySlice = createSlice({
 			})
 			.addCase(UpdateFacility.fulfilled, (state, action) => {
 				const updatedFacility = action.payload.data
-				console.log(action.payload)
 				state.facilities = state.facilities.map((facility) =>
 					facility.id === updatedFacility.id ? updatedFacility : facility
 				)
@@ -105,7 +114,6 @@ const facilitySlice = createSlice({
 				state.loading = 'idle'
 				state.error = action.error.message
 			})
-
 			.addCase(ReactivateFacility.pending, (state) => {
 				state.loading = 'pending'
 			})
@@ -124,8 +132,11 @@ const facilitySlice = createSlice({
 	},
 })
 
-export const { resetSelectedFacility, resetHighlightedRow } =
-	facilitySlice.actions
+export const {
+	setQueryParameters,
+	resetSelectedFacility,
+	resetHighlightedRow,
+} = facilitySlice.actions
 
 export {
 	CreateFacility,
