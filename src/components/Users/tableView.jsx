@@ -46,9 +46,9 @@ const tableView = ({ list, onDetail, onDelete }) => {
 					</Tooltip>
 				</div>
 			),
-			userName: (item) => (
+			fullName: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
-					{item?.userName}
+					{item?.firstName} {item?.lastName}
 				</div>
 			),
 			email: (item) => (
@@ -56,11 +56,11 @@ const tableView = ({ list, onDetail, onDelete }) => {
 					{item?.email}
 				</div>
 			),
-			isActive: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[100px]'>
-					{item?.isActive ? 'Active' : 'Inactive'}
-				</div>
-			),
+			// isActive: (item) => (
+			// 	<div className='table-row-color text-sm leading-[18px] w-[100px]'>
+			// 		{item?.isActive ? 'Active' : 'Inactive'}
+			// 	</div>
+			// ),
 			facilityId: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
 					{item?.facility?.name}

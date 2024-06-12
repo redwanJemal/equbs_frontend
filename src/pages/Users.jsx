@@ -6,31 +6,27 @@ import { Modal, message } from 'antd'
 import DataTable from '@/components/DynamicTable/DataTable'
 import tableView from '@/components/Users/tableView'
 import { userColumnsConfig } from '@/components/Users/config'
-import { DeleteUser, GetAllUsers, GetUserById } from '@/stores/users'
+import {
+	DeleteUser,
+	GetAllUsers,
+	GetUserById,
+	setUserQueryParameters,
+} from '@/stores/users'
 import { buildQueryString } from '@/utils/buildQueryString'
 import UserAddEditDrawer from '@/components/Users/UserAddEditDrawer'
 import { openDrawer } from '@/stores/drawerSlice'
 
 const UsersPage = () => {
-	const [queryParameters, setQueryParameters] = useState({
-		page: 1,
-		limit: 10,
-		filters: {},
-		include: 'roles,permission',
-		term: '',
-		sortBy: '',
-		sortOrder: '',
-	})
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
 
 	useEffect(() => {
-		dispatch(GetAllUsers(buildQueryString(queryParameters)))
-	}, [dispatch, queryParameters])
+		// Dispatch the setQueryParameters action on initial load
+		dispatch(setUserQueryParameters({ page: 1, pageSize: 10 }))
+	}, [dispatch])
 
-	const { users, loading, meta, highlightedRowId } = useSelector(
-		(state) => state.users
-	)
+	const { users, loading, meta, highlightedRowId, queryParameters } =
+		useSelector((state) => state.users)
 
 	const isOpenDrawer = useSelector((state) => state.drawer.isOpen)
 
@@ -94,14 +90,21 @@ const UsersPage = () => {
 
 	const handleSearch = (searchValue) => {
 		console.log('Search value:', searchValue)
+		dispatch(
+			setUserQueryParameters({
+				...queryParameters,
+				term: searchValue,
+			})
+		)
 	}
 
 	const onPaginateApply = async (newPageNumber) => {
-		console.log('Paginate to page:', newPageNumber)
-		setQueryParameters({
-			...queryParameters,
-			page: newPageNumber,
-		})
+		dispatch(
+			setUserQueryParameters({
+				...queryParameters,
+				page: newPageNumber,
+			})
+		)
 	}
 
 	return (

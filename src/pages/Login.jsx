@@ -1,33 +1,28 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
-import {
-	LockOutlined,
-	UserOutlined,
-	AlipayCircleOutlined,
-	TaobaoCircleOutlined,
-	WeiboCircleOutlined,
-} from '@ant-design/icons'
+import React, { useState } from 'react'
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { Form, Input, Button, Checkbox, Space, message, theme } from 'antd'
 import { useNavigate } from 'react-router-dom'
-
+import { login } from '../auth'
 import Logo from '@/assets/logomoh.png'
 
 const LoginForm = () => {
 	const { token } = theme.useToken()
 	const navigate = useNavigate()
+	const [loading, setLoading] = useState(false)
 
-	const iconStyles = {
-		marginInlineStart: '16px',
-		color: `rgba(${token.colorTextBase}, 0.2)`,
-		fontSize: '24px',
-		verticalAlign: 'middle',
-		cursor: 'pointer',
-	}
-
-	const onFinish = (values) => {
-		console.log('Success:', values)
-		message.success('Login successful!')
-		navigate('/dashboard') // Navigate to the dashboard page
+	const onFinish = async (values) => {
+		setLoading(true)
+		try {
+			await login(values.username, values.password)
+			message.success('Login successful!')
+			navigate('/dashboard') // Navigate to the dashboard page
+		} catch (error) {
+			console.error('Login failed:', error)
+			message.error('Login failed. Please check your credentials.')
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	const onFinishFailed = (errorInfo) => {
@@ -56,7 +51,7 @@ const LoginForm = () => {
 						<Input
 							size='large'
 							prefix={<UserOutlined className='prefixIcon' />}
-							placeholder='Username: admin or user'
+							placeholder='Username'
 						/>
 					</Form.Item>
 					<Form.Item
@@ -66,7 +61,7 @@ const LoginForm = () => {
 						<Input.Password
 							size='large'
 							prefix={<LockOutlined className='prefixIcon' />}
-							placeholder='Password: ant.design'
+							placeholder='Password'
 						/>
 					</Form.Item>
 					<Form.Item>
@@ -76,7 +71,12 @@ const LoginForm = () => {
 						<a className='float-right'>Forgot password</a>
 					</Form.Item>
 					<Form.Item>
-						<Button type='primary' htmlType='submit' className='w-full'>
+						<Button
+							type='primary'
+							htmlType='submit'
+							className='w-full'
+							loading={loading}
+						>
 							Login
 						</Button>
 					</Form.Item>

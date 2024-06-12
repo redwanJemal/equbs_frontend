@@ -2,13 +2,22 @@ import * as Yup from 'yup'
 
 export const UserFieldConfigs = [
 	{
-		id: 'userName',
-		name: 'userName',
+		id: 'firstName',
+		name: 'firstName',
 		type: 'text',
-		placeholder: 'Type user name',
+		placeholder: 'Type user First name',
 		label: 'First Name',
 		required: true,
-		validation: Yup.string().required('User Name is required'),
+		validation: Yup.string().required('First Name is required'),
+	},
+	{
+		id: 'lastName',
+		name: 'lastName',
+		type: 'text',
+		placeholder: 'Type Last Name',
+		label: 'Last Name',
+		required: true,
+		validation: Yup.string().required('Last Name is required'),
 	},
 	{
 		id: 'password',
@@ -31,23 +40,10 @@ export const UserFieldConfigs = [
 			.required('Email is required'),
 	},
 	{
-		id: 'isActive',
-		name: 'isActive',
-		type: 'select',
-		placeholder: 'Select status',
-		label: 'Is Active',
-		required: true,
-		options: [
-			{ value: true, label: 'Active' },
-			{ value: false, label: 'Inactive' },
-		],
-		validation: Yup.boolean().required('Status is required'),
-	},
-	{
 		id: 'facilityId',
 		name: 'facilityId',
 		type: 'select_api',
-		optionLabelKey: 'facilityName',
+		optionLabelKey: 'name',
 		placeholder: 'Select Facility',
 		label: 'Facility',
 		required: true,
@@ -67,9 +63,9 @@ export const UserFieldConfigs = [
 
 export const userColumnsConfig = [
 	{
-		title: 'User Name',
-		dataIndex: 'userName',
-		key: 'userName',
+		title: 'Full Name',
+		dataIndex: 'fullName',
+		key: 'fullName',
 		responsive: ['sm', 'md', 'lg'],
 		width: 150,
 	},
@@ -80,13 +76,13 @@ export const userColumnsConfig = [
 		responsive: ['sm', 'md', 'lg'],
 		width: 200,
 	},
-	{
-		title: 'Status',
-		dataIndex: 'isActive',
-		key: 'isActive',
-		responsive: ['sm', 'md', 'lg'],
-		width: 80,
-	},
+	// {
+	// 	title: 'Status',
+	// 	dataIndex: 'isActive',
+	// 	key: 'isActive',
+	// 	responsive: ['sm', 'md', 'lg'],
+	// 	width: 80,
+	// },
 	{
 		title: 'Facility',
 		dataIndex: 'facilityId',

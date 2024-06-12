@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { Suspense, lazy, useEffect } from 'react'
 import {
@@ -8,6 +9,7 @@ import {
 } from 'react-router-dom'
 import { Spin } from 'antd'
 import ResponsiveLayout from './layouts/DashboardLayout'
+import { getToken } from './auth'
 
 // Lazy load components
 const UsersPage = lazy(() => import('./pages/Users'))
@@ -24,6 +26,11 @@ const preloadComponents = () => {
 	import('./pages/Users')
 	import('./pages/Dashboard')
 	import('./pages/NotFound')
+}
+
+const PrivateRoute = ({ children }) => {
+	const token = getToken()
+	return token ? children : <Navigate to='/login' replace />
 }
 
 const AppRoutes = () => {
@@ -43,16 +50,57 @@ const AppRoutes = () => {
 				<Routes>
 					<Route path='' element={<ResponsiveLayout />}>
 						<Route index element={<Navigate to='/dashboard' replace />} />
-						<Route path='/dashboard' element={<Dashboard />} />
-						<Route path='/users' element={<UsersPage />} />
-						<Route path='/facility-list' element={<FacilityListPage />} />
-						<Route path='/facility-type' element={<FacilityTypePage />} />
-						<Route path='/referral-in' element={<ReferalInPage />} />
-						<Route path='/referral-out' element={<ReferalOutPage />} />
+						<Route
+							path='/dashboard'
+							element={
+								<PrivateRoute>
+									<Dashboard />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/users'
+							element={
+								<PrivateRoute>
+									<UsersPage />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/facility-list'
+							element={
+								<PrivateRoute>
+									<FacilityListPage />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/facility-type'
+							element={
+								<PrivateRoute>
+									<FacilityTypePage />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/referral-in'
+							element={
+								<PrivateRoute>
+									<ReferalInPage />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/referral-out'
+							element={
+								<PrivateRoute>
+									<ReferalOutPage />
+								</PrivateRoute>
+							}
+						/>
 						<Route path='*' element={<NotFound />} />
 					</Route>
-					<Route path='' element={<LoginPage />}></Route>
-					<Route path='login' element={<LoginPage />}></Route>
+					<Route path='login' element={<LoginPage />} />
 					<Route path='*' element={<NotFound />} />
 				</Routes>
 			</Suspense>

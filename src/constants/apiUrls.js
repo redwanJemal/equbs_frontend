@@ -1,6 +1,6 @@
 export const USER_LIST_ALL_URL = '/api/v1/users'
 export const USER_GET_BY_ID_URL = '/api/v1/users'
-export const USER_CREATE_URL = '/api/v1/users/create'
+export const USER_CREATE_URL = '/api/v1/users/register'
 export const USER_UPDATE_URL = '/api/v1/users/update'
 export const USER_DELETE_URL = '/api/v1/users/delete'
 

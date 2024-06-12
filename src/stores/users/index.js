@@ -24,6 +24,9 @@ const userlSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
+		setUserQueryParameters(state, action) {
+			state.queryParameters = { ...state.queryParameters, ...action.payload }
+		},
 		resetSelectedUser(state) {
 			console.log('setting selected user')
 			state.selectedUser = null
@@ -38,8 +41,8 @@ const userlSlice = createSlice({
 				state.loading = 'pending'
 			})
 			.addCase(GetAllUsers.fulfilled, (state, action) => {
-				state.users = action.payload.data.result.items
-				state.meta = action.payload.data.result.meta
+				state.users = action.payload.data.items
+				state.meta = action.payload.data.meta
 				state.loading = 'idle'
 			})
 			.addCase(GetAllUsers.rejected, (state, action) => {
@@ -103,7 +106,11 @@ const userlSlice = createSlice({
 	},
 })
 
-export const { resetSelectedUser, resetHighlightedRow } = userlSlice.actions
+export const {
+	setUserQueryParameters,
+	resetSelectedUser,
+	resetHighlightedRow,
+} = userlSlice.actions
 
 export { CreateUser, UpdateUser, GetAllUsers, GetUserById, DeleteUser }
 

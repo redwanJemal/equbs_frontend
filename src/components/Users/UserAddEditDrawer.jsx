@@ -31,7 +31,8 @@ const UserAddEditDrawer = () => {
 	const dispatch = useDispatch()
 
 	const initialValues = {
-		userName: '',
+		firstName: '',
+		lastName: '',
 		birthdate: '',
 		password: '',
 		email: '',
@@ -65,11 +66,12 @@ const UserAddEditDrawer = () => {
 	useEffect(() => {
 		if (selectedUser) {
 			formik.setValues({
-				userName: selectedUser?.userName || '',
+				firstName: selectedUser?.firstName || '',
+				lastName: selectedUser?.lastName || '',
 				password: selectedUser?.password || '',
 				email: selectedUser?.email || '',
 				isActive: selectedUser?.isActive ? 'true' : 'false',
-				facilityId: selectedUser?.facility?.id || '',
+				facilityId: selectedUser?.facility?.facilityId || '',
 				phoneNumber: selectedUser?.phoneNumber || '',
 			})
 		}
