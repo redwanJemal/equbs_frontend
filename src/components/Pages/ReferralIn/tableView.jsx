@@ -36,7 +36,7 @@ const referralInTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			),
 			fullName: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[200px]'>
-					{item?.firstName} {item?.lastName}
+					{item?.patientFullName}
 				</div>
 			),
 			cardNumber: (item) => (
@@ -46,7 +46,7 @@ const referralInTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			),
 			referralTypeId: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.referralTypeId === 1 ? 'Cold' : 'Emergency'}
+					{item?.referralType}
 				</div>
 			),
 			reasonForReferral: (item) => (

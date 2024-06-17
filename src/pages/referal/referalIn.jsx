@@ -11,127 +11,31 @@ import {
 	GetFacilityById,
 	ReactivateFacility,
 } from '@/stores/facility'
-import { facilityColumnsConfig } from '@/components/Pages/Facility/config'
 import DataTable from '@/components/DynamicTable/DataTable'
-import referralOutTableView from '@/components/Pages/Referal/tableView'
-import ReferralOutAddEditDrawer from '@/components/Pages/Referal/referral-addEdit'
 import { referralOutColumnsConfig } from '@/components/Pages/Referal/config'
 import ReferralInDetail from '@/components/Pages/ReferralIn/referral-addEdit'
 import referralInTableView from '@/components/Pages/ReferralIn/tableView'
-
-const sampleData = [
-	{
-		facilityName: 'Addis Ababa Health Center',
-		firstName: 'Alemu',
-		lastName: 'Gebre',
-		cardNumber: '12345',
-		referralTypeId: 1,
-		reasonForReferral: 'Routine Checkup',
-		status: 'Pending',
-	},
-	{
-		facilityName: 'Gondar General Hospital',
-		firstName: 'Fatima',
-		lastName: 'Mohammed',
-		cardNumber: '67890',
-		referralTypeId: 2,
-		reasonForReferral: 'Emergency Surgery',
-		status: 'Accepted',
-	},
-	{
-		facilityName: 'Bahir Dar Clinic',
-		firstName: 'Hassan',
-		lastName: 'Ahmed',
-		cardNumber: '54321',
-		referralTypeId: 1,
-		reasonForReferral: 'Follow-up Visit',
-		status: 'Rejected',
-	},
-	{
-		facilityName: 'Adama Medical Center',
-		firstName: 'Sara',
-		lastName: 'Ali',
-		cardNumber: '98765',
-		referralTypeId: 2,
-		reasonForReferral: 'Severe Injury',
-		status: 'Pending',
-	},
-	{
-		facilityName: 'Mekele Health Institute',
-		firstName: 'Abdi',
-		lastName: 'Nur',
-		cardNumber: '11223',
-		referralTypeId: 1,
-		reasonForReferral: 'Regular Checkup',
-		status: 'Accepted',
-	},
-	{
-		facilityName: 'Hawassa Regional Hospital',
-		firstName: 'Muna',
-		lastName: 'Ibrahim',
-		cardNumber: '44556',
-		referralTypeId: 2,
-		reasonForReferral: 'Accident',
-		status: 'Rejected',
-	},
-	{
-		facilityName: 'Jimma Health Center',
-		firstName: 'Yusuf',
-		lastName: 'Mohammed',
-		cardNumber: '33445',
-		referralTypeId: 1,
-		reasonForReferral: 'Routine Checkup',
-		status: 'Pending',
-	},
-	{
-		facilityName: 'Dire Dawa Clinic',
-		firstName: 'Leyla',
-		lastName: 'Ahmed',
-		cardNumber: '55667',
-		referralTypeId: 2,
-		reasonForReferral: 'Severe Illness',
-		status: 'Accepted',
-	},
-	{
-		facilityName: 'Harar General Hospital',
-		firstName: 'Aisha',
-		lastName: 'Ali',
-		cardNumber: '77889',
-		referralTypeId: 1,
-		reasonForReferral: 'Pregnancy Checkup',
-		status: 'Rejected',
-	},
-	{
-		facilityName: 'Awassa Health Center',
-		firstName: 'Omar',
-		lastName: 'Abdullah',
-		cardNumber: '99000',
-		referralTypeId: 2,
-		reasonForReferral: 'Emergency Case',
-		status: 'Pending',
-	},
-]
+import { setReferralInQueryParameters } from '@/stores/referrals'
+import { SAMPLE_FACILITY_ID } from '@/constants/apiUrls'
 
 const ReferraInPage = () => {
-	const [queryParameters, setQueryParameters] = useState({
-		page: 1,
-		limit: 10,
-		filters: {},
-		include: 'facilityType',
-		term: '',
-		sortBy: '',
-		sortOrder: '',
-	})
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
 
 	useEffect(() => {
-		dispatch(GetAllFacilities(buildQueryString(queryParameters)))
-	}, [dispatch, queryParameters])
+		// Dispatch the setQueryParameters action on initial load
+		dispatch(
+			setReferralInQueryParameters({
+				page: 1,
+				pageSize: 10,
+				filters: { facilityId: SAMPLE_FACILITY_ID },
+			})
+		)
+	}, [dispatch])
 
-	const { facilities, loading, meta, highlightedRowId } = useSelector(
-		(state) => state.facilities
-	)
+	const { referralIns, queryParameters, loading, meta, highlightedRowId } =
+		useSelector((state) => state.referrals)
+
 	const isOpenDrawer = useSelector((state) => state.drawer.isOpen)
 
 	const handleDetail = async (id) => {
@@ -219,7 +123,7 @@ const ReferraInPage = () => {
 
 	const onPaginateApply = async (newPageNumber) => {
 		console.log('Paginate to page:', newPageNumber)
-		setQueryParameters({
+		setReferralInQueryParameters({
 			...queryParameters,
 			page: newPageNumber,
 		})
@@ -229,9 +133,9 @@ const ReferraInPage = () => {
 		<>
 			<DataTable
 				pageId={'referralIns'}
-				data={sampleData}
+				data={referralIns}
 				config={referralInTableView({
-					list: sampleData,
+					list: referralIns,
 					onDelete: confirmDeletion,
 					onDetail: handleDetail,
 					onReactivate: confirmReactivation,

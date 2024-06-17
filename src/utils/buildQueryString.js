@@ -11,7 +11,7 @@ export const buildQueryString = ({
 
 	Object.entries(filters).forEach(([key, value]) => {
 		if (value) {
-			queryString += `&filter[${key}]=${value}`
+			queryString += `&${key}=${value}`
 		}
 	})
 

@@ -4,145 +4,32 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Modal, message } from 'antd'
-import { buildQueryString } from '@/utils/buildQueryString'
 import { openDrawer } from '@/stores/drawerSlice'
-import {
-	DeleteFacility,
-	GetAllFacilities,
-	GetFacilityById,
-	ReactivateFacility,
-} from '@/stores/facility'
-import { facilityColumnsConfig } from '@/components/Pages/Facility/config'
 import DataTable from '@/components/DynamicTable/DataTable'
 import referralOutTableView from '@/components/Pages/Referal/tableView'
 import ReferralOutAddEditDrawer from '@/components/Pages/Referal/referral-addEdit'
 import { referralOutColumnsConfig } from '@/components/Pages/Referal/config'
-import FilterComponent from '@/components/FilterComponent'
-
-const sampleData = [
-	{
-		facilityName: 'Addis Ababa Health Center',
-		firstName: 'Alemu',
-		lastName: 'Gebre',
-		cardNumber: '12345',
-		reasonForReferral: 'Routine Checkup',
-		status: 'Pending',
-		category: 'General',
-		referralTypeId: 1,
-	},
-	{
-		facilityName: 'Gondar General Hospital',
-		firstName: 'Fatima',
-		lastName: 'Mohammed',
-		cardNumber: '67890',
-		reasonForReferral: 'Emergency Surgery',
-		status: 'Accepted',
-		category: 'Emergency',
-		referralTypeId: 2,
-	},
-	{
-		facilityName: 'Bahir Dar Clinic',
-		firstName: 'Hassan',
-		lastName: 'Ahmed',
-		cardNumber: '54321',
-		reasonForReferral: 'Follow-up Visit',
-		status: 'Rejected',
-		category: 'General',
-		referralTypeId: 1,
-	},
-	{
-		facilityName: 'Adama Medical Center',
-		firstName: 'Sara',
-		lastName: 'Ali',
-		cardNumber: '98765',
-		reasonForReferral: 'Severe Injury',
-		status: 'Pending',
-		category: 'Emergency',
-		referralTypeId: 2,
-	},
-	{
-		facilityName: 'Mekele Health Institute',
-		firstName: 'Abdi',
-		lastName: 'Nur',
-		cardNumber: '11223',
-		reasonForReferral: 'Regular Checkup',
-		status: 'Accepted',
-		category: 'General',
-		referralTypeId: 1,
-	},
-	{
-		facilityName: 'Hawassa Regional Hospital',
-		firstName: 'Muna',
-		lastName: 'Ibrahim',
-		cardNumber: '44556',
-		reasonForReferral: 'Accident',
-		status: 'Rejected',
-		category: 'Emergency',
-		referralTypeId: 1,
-	},
-	{
-		facilityName: 'Jimma Health Center',
-		firstName: 'Yusuf',
-		lastName: 'Mohammed',
-		cardNumber: '33445',
-		reasonForReferral: 'Routine Checkup',
-		status: 'Pending',
-		category: 'General',
-		referralTypeId: 1,
-	},
-	{
-		facilityName: 'Dire Dawa Clinic',
-		firstName: 'Leyla',
-		lastName: 'Ahmed',
-		cardNumber: '55667',
-		reasonForReferral: 'Severe Illness',
-		status: 'Accepted',
-		category: 'Emergency',
-		referralTypeId: 2,
-	},
-	{
-		facilityName: 'Harar General Hospital',
-		firstName: 'Aisha',
-		lastName: 'Ali',
-		cardNumber: '77889',
-		reasonForReferral: 'Pregnancy Checkup',
-		status: 'Rejected',
-		category: 'General',
-		referralTypeId: 1,
-	},
-	{
-		facilityName: 'Awassa Health Center',
-		firstName: 'Omar',
-		lastName: 'Abdullah',
-		cardNumber: '99000',
-		reasonForReferral: 'Emergency Case',
-		status: 'Pending',
-		category: 'Emergency',
-		referralTypeId: 1,
-	},
-]
+import { setReferralQueryParameters } from '@/stores/referrals'
+import { SAMPLE_FACILITY_ID } from '@/constants/apiUrls'
 
 const ReferralOutPage = () => {
-	const [queryParameters, setQueryParameters] = useState({
-		page: 1,
-		limit: 10,
-		filters: {},
-		include: 'facilityType',
-		term: '',
-		sortBy: '',
-		sortOrder: '',
-	})
-	const [filteredData, setFilteredData] = useState(sampleData)
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
 
 	useEffect(() => {
-		dispatch(GetAllFacilities(buildQueryString(queryParameters)))
-	}, [dispatch, queryParameters])
+		// Dispatch the setQueryParameters action on initial load
+		dispatch(
+			setReferralQueryParameters({
+				page: 1,
+				pageSize: 10,
+				filters: { facilityId: SAMPLE_FACILITY_ID },
+			})
+		)
+	}, [dispatch])
 
-	const { facilities, loading, meta, highlightedRowId } = useSelector(
-		(state) => state.facilities
-	)
+	const { referralOuts, loading, meta, highlightedRowId, queryParameters } =
+		useSelector((state) => state.referrals)
+	const [filteredData, setFilteredData] = useState(referralOuts)
 	const isOpenDrawer = useSelector((state) => state.drawer.isOpen)
 	const [modalOpen, setModalOpen] = useState(false)
 
@@ -201,20 +88,20 @@ const ReferralOutPage = () => {
 	}
 
 	const onFilterApply = (filters) => {
-		const filtered = sampleData.filter(
-			(item) =>
-				(filters.categories.length === 0 ||
-					filters.categories.includes(
-						item.referralTypeId === 1 ? 'Cold' : 'Emergency'
-					)) &&
-				(filters.statuses.length === 0 ||
-					filters.statuses.includes(item.status))
-		)
-		setFilteredData(filtered)
-		setQueryParameters((prev) => ({
-			...prev,
-			filters,
-		}))
+		// const filtered = referrals.filter(
+		// 	(item) =>
+		// 		(filters.categories.length === 0 ||
+		// 			filters.categories.includes(
+		// 				item.referralTypeId === 1 ? 'Cold' : 'Emergency'
+		// 			)) &&
+		// 		(filters.statuses.length === 0 ||
+		// 			filters.statuses.includes(item.status))
+		// )
+		// setFilteredData(filtered)
+		// setQueryParameters((prev) => ({
+		// 	...prev,
+		// 	filters,
+		// }))
 	}
 
 	const confirmBulkDeletion = (selectedItems) => {

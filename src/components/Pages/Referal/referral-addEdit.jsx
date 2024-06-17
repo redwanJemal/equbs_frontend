@@ -12,12 +12,12 @@ import {
 } from '@/components/Pages/Referal/config'
 import { closeDrawer } from '@/stores/drawerSlice'
 import {
-	CreateFacility as CreateReferral,
-	UpdateFacility as UpdateReferral,
-	resetSelectedFacility as resetSelectedReferral,
-} from '@/stores/facility'
-
-const { Step } = Steps
+	CreateReferral,
+	UpdateReferral,
+	resetSelectedReferral,
+	setReferralQueryParameters,
+} from '@/stores/referrals'
+import { SAMPLE_FACILITY_ID } from '@/constants/apiUrls'
 
 const buildValidationSchema = (fieldConfigs) => {
 	const schema = fieldConfigs.reduce((acc, field) => {
@@ -54,22 +54,29 @@ const ReferralOutAddEditDrawer = () => {
 	const isDrawerOpen = useSelector((state) => state.drawer.isOpen)
 
 	const initialValues = {
+		referringFacilityId: '',
+		receivingFacilityId: '',
 		firstName: '',
 		lastName: '',
-		age: '',
-		gender: '',
+		dateOfBirth: '',
+		street: '',
+		city: '',
+		state: '',
+		zipCode: '',
+		country: 'USA',
 		phoneNumber: '',
 		woreda: '',
 		kebele: '',
 		houseNumber: '',
 		cardNumber: '',
-		referralTypeId: '',
+		referralType: '',
 		clinicalFindings: '',
 		diagnosis: '',
 		investigationResult: '',
 		rxGiven: '',
 		reasonForReferral: '',
 		nameOfPhysician: '',
+		date: '',
 	}
 
 	const validationSchemas = steps.map((step) => step.validationSchema)
@@ -78,21 +85,37 @@ const ReferralOutAddEditDrawer = () => {
 		initialValues: selectedReferral || initialValues,
 		validationSchema: validationSchemas[current],
 		onSubmit: async (values) => {
-			const payload = values
+			const formattedValues = {
+				...values,
+				dateOfBirth: new Date(values.dateOfBirth).toISOString(),
+				date: new Date(values.date).toISOString(),
+			}
+
+			const payload = formattedValues
 			const action = isEditMode ? UpdateReferral : CreateReferral
 			const id = selectedReferral?.id ? selectedReferral.id : null
 
 			if (isEditMode) {
 				payload.id = id
 			}
+			payload.referringFacilityId = SAMPLE_FACILITY_ID
 			const response = await dispatch(action({ id, payload }))
 			if (response.error) {
-				message.error(response.payload.message)
+				message.error(`Failed to ${isEditMode ? 'Update' : 'Create'} Referral`)
 			} else {
-				message.success(response.payload.data.message)
+				message.success(
+					`Succedded on ${isEditMode ? 'Updating' : 'Creating'} Referral`
+				)
 				formik.resetForm()
 				dispatch(resetSelectedReferral())
 				dispatch(closeDrawer())
+				dispatch(
+					setReferralQueryParameters({
+						page: 1,
+						pageSize: 11,
+						filters: { facilityId: SAMPLE_FACILITY_ID },
+					})
+				)
 			}
 		},
 	})
@@ -100,22 +123,29 @@ const ReferralOutAddEditDrawer = () => {
 	useEffect(() => {
 		if (selectedReferral) {
 			formik.setValues({
+				referringFacilityId: selectedReferral?.referringFacilityId || '',
+				receivingFacilityId: selectedReferral?.receivingFacilityId || '',
 				firstName: selectedReferral?.firstName || '',
 				lastName: selectedReferral?.lastName || '',
-				age: selectedReferral?.age || '',
-				gender: selectedReferral?.gender || '',
+				dateOfBirth: selectedReferral?.dateOfBirth || '',
+				street: selectedReferral?.street || '',
+				city: selectedReferral?.city || '',
+				state: selectedReferral?.state || '',
+				zipCode: selectedReferral?.zipCode || '',
+				country: selectedReferral?.country || 'USA',
 				phoneNumber: selectedReferral?.phoneNumber || '',
 				woreda: selectedReferral?.woreda || '',
 				kebele: selectedReferral?.kebele || '',
 				houseNumber: selectedReferral?.houseNumber || '',
 				cardNumber: selectedReferral?.cardNumber || '',
-				referralTypeId: selectedReferral?.referralTypeId || '',
+				referralType: selectedReferral?.referralType || '',
 				clinicalFindings: selectedReferral?.clinicalFindings || '',
 				diagnosis: selectedReferral?.diagnosis || '',
 				investigationResult: selectedReferral?.investigationResult || '',
 				rxGiven: selectedReferral?.rxGiven || '',
 				reasonForReferral: selectedReferral?.reasonForReferral || '',
 				nameOfPhysician: selectedReferral?.nameOfPhysician || '',
+				date: selectedReferral?.date || '',
 			})
 		}
 	}, [selectedReferral])

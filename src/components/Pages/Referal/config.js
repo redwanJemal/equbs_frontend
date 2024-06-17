@@ -20,29 +20,64 @@ export const PersonalInfoFieldConfigs = [
 		validation: Yup.string().required('Last Name is required'),
 	},
 	{
-		id: 'age',
-		name: 'age',
-		type: 'number',
-		placeholder: 'Enter your age',
-		label: 'Age',
+		id: 'dateOfBirth',
+		name: 'dateOfBirth',
+		type: 'date_picker',
+		placeholder: 'Enter your date of birth',
+		label: 'Date of Birth',
 		required: true,
-		validation: Yup.number()
-			.required('Age is required')
-			.positive('Age must be a positive number')
-			.integer('Age must be an integer'),
+		validation: Yup.date().required('Date of Birth is required'),
 	},
 	{
-		id: 'gender',
-		name: 'gender',
+		id: 'street',
+		name: 'street',
+		type: 'text',
+		placeholder: 'Enter your street',
+		label: 'Street',
+		required: true,
+		validation: Yup.string().required('Street is required'),
+	},
+	{
+		id: 'city',
+		name: 'city',
+		type: 'text',
+		placeholder: 'Enter your city',
+		label: 'City',
+		required: true,
+		validation: Yup.string().required('City is required'),
+	},
+	{
+		id: 'state',
+		name: 'state',
+		type: 'text',
+		placeholder: 'Enter your state',
+		label: 'State',
+		required: true,
+		validation: Yup.string().required('State is required'),
+	},
+	{
+		id: 'zipCode',
+		name: 'zipCode',
+		type: 'text',
+		placeholder: 'Enter your zip code',
+		label: 'Zip Code',
+		required: true,
+		validation: Yup.string().required('Zip Code is required'),
+	},
+	{
+		id: 'country',
+		name: 'country',
 		type: 'select',
-		placeholder: 'Select your gender',
-		label: 'Gender',
+		placeholder: 'Select Country',
+		label: 'Country',
 		required: true,
 		options: [
-			{ value: 'male', label: 'Male' },
-			{ value: 'female', label: 'Female' },
+			{ value: 'USA', label: 'USA' },
+			{ value: 'Ethiopia', label: 'Ethiopia' },
+			// Add other countries as needed
 		],
-		validation: Yup.string().required('Gender is required'),
+		validation: Yup.string().required('Country is required'),
+		defaultValue: 'USA',
 	},
 	{
 		id: 'phoneNumber',
@@ -93,17 +128,28 @@ export const PersonalInfoFieldConfigs = [
 
 export const ClinicalFindingsFieldConfigs = [
 	{
-		id: 'referralTypeId',
-		name: 'referralTypeId',
+		id: 'receivingFacilityId',
+		name: 'receivingFacilityId',
+		placeholder: 'Select Receiving Facility',
+		label: 'Receiving Facility',
+		required: true,
+		apiUrl: 'api/v1/facilities',
+		validation: Yup.string().required('Receiving Facility is required'),
+		type: 'select_api',
+		optionLabelKey: 'name',
+	},
+	{
+		id: 'referralType',
+		name: 'referralType',
 		type: 'select',
 		placeholder: 'Select referral type',
 		label: 'Referral Type',
 		required: true,
 		options: [
-			{ value: 1, label: 'Cold' },
-			{ value: 2, label: 'Emergency' },
+			{ value: 'Cold', label: 'Cold' },
+			{ value: 'Emergency', label: 'Emergency' },
 		],
-		validation: Yup.number().required('Referral Type is required'),
+		validation: Yup.string().required('Referral Type is required'),
 	},
 	{
 		id: 'clinicalFindings',
@@ -159,45 +205,16 @@ export const ClinicalFindingsFieldConfigs = [
 		required: true,
 		validation: Yup.string().required('Name Of Physician is required'),
 	},
+	{
+		id: 'date',
+		name: 'date',
+		type: 'date_picker',
+		placeholder: 'Enter date of referral',
+		label: 'Date',
+		required: true,
+		validation: Yup.date().required('Date is required'),
+	},
 ]
-
-// export const referralOutColumnsConfig = [
-// 	{
-// 		title: 'Facility Name',
-// 		dataIndex: 'facilityName',
-// 		key: 'facilityName',
-// 		responsive: ['sm', 'md', 'lg'],
-// 		width: 150,
-// 	},
-// 	{
-// 		title: 'Facility Type',
-// 		dataIndex: 'facilityType',
-// 		key: 'facilityType',
-// 		responsive: ['sm', 'md', 'lg'],
-// 		width: 200,
-// 	},
-// 	{
-// 		title: 'Status',
-// 		dataIndex: 'isActive',
-// 		key: 'isActive',
-// 		responsive: ['sm', 'md', 'lg'],
-// 		width: 80,
-// 	},
-// 	{
-// 		title: 'Contact Number',
-// 		dataIndex: 'contactNumber',
-// 		key: 'contactNumber',
-// 		responsive: ['sm', 'md', 'lg'],
-// 		width: 150,
-// 	},
-// 	{
-// 		title: '',
-// 		dataIndex: 'actions',
-// 		key: 'actions',
-// 		responsive: ['sm', 'md', 'lg'],
-// 		width: 80,
-// 	},
-// ]
 
 export const referralOutColumnsConfig = [
 	{

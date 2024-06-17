@@ -9,3 +9,12 @@ export const FACILITY_DELETE_URL = '/api/v1/facilities/delete'
 export const FACILITY_GET_BY_ID_URL = '/api/v1/facilities'
 export const FACILITY_LIST_ALL_URL = '/api/v1/facilities'
 export const FACILITY_UPDATE_URL = '/api/v1/facilities'
+
+export const REFERRAL_CREATE_URL = '/api/v1/referrals/'
+export const REFERRAL_ACCEPT_URL = '/api/v1/referrals/{id}/accept'
+export const REFERRAL_REJECT_URL = '/api/v1/referrals/{id}/reject'
+export const REFERRAL_GET_ALL_URL = '/api/v1/referrals'
+export const REFERRAL_GET_OUT_URL = '/api/v1/referrals/referring'
+export const REFERRAL_GET_IN_URL = '/api/v1/referrals/receiving'
+
+export const SAMPLE_FACILITY_ID = 'b1d29d0c-8a2b-42d5-a9b8-5c2cfa5dfb3e'
