@@ -68,9 +68,9 @@ const userlSlice = createSlice({
 				state.loading = 'pending'
 			})
 			.addCase(CreateUser.fulfilled, (state, action) => {
-				state.users.unshift(action.payload.data.data)
+				state.users.unshift(action.payload.data)
 				state.loading = 'idle'
-				state.highlightedRowId = action.payload.data.data.id // Set highlightedRowId
+				state.highlightedRowId = action.payload.data.id // Set highlightedRowId
 			})
 			.addCase(CreateUser.rejected, (state, action) => {
 				state.loading = 'idle'

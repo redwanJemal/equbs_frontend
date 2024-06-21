@@ -40,17 +40,6 @@ export const UserFieldConfigs = [
 			.required('Email is required'),
 	},
 	{
-		id: 'facilityId',
-		name: 'facilityId',
-		type: 'select_api',
-		optionLabelKey: 'name',
-		placeholder: 'Select Facility',
-		label: 'Facility',
-		required: true,
-		apiUrl: 'api/v1/facilities',
-		validation: Yup.string().required('Facility is required'),
-	},
-	{
 		id: 'phoneNumber',
 		name: 'phoneNumber',
 		type: 'text',
@@ -75,20 +64,6 @@ export const userColumnsConfig = [
 		key: 'email',
 		responsive: ['sm', 'md', 'lg'],
 		width: 200,
-	},
-	// {
-	// 	title: 'Status',
-	// 	dataIndex: 'isActive',
-	// 	key: 'isActive',
-	// 	responsive: ['sm', 'md', 'lg'],
-	// 	width: 80,
-	// },
-	{
-		title: 'Facility',
-		dataIndex: 'facilityId',
-		key: 'facilityId',
-		responsive: ['sm', 'md', 'lg'],
-		width: 300,
 	},
 	{
 		title: 'Phone Number',

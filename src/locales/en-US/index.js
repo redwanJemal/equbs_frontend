@@ -7,5 +7,5 @@ export default {
 	'global.header.theme.swith_to_dark': 'Switch to Dark',
 	'global.header.theme.swith_to_light': 'Switch to light',
 	'global.header.theme.lightTooltip': 'Light',
-	'global.header.application': 'Electronic Referal System',
+	'global.header.application': 'Ebrish Equb',
 }

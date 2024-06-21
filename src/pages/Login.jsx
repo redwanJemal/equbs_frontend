@@ -36,7 +36,7 @@ const LoginForm = () => {
 				<div className='text-center mb-6'>
 					<img src={Logo} alt='logo' className='w-12 mx-auto' />
 					<h2 className='text-2xl font-semibold'>MOH</h2>
-					<p className='text-gray-600'>Electronic Referral System</p>
+					<p className='text-gray-600'>Ebrish Equb</p>
 				</div>
 				<Form
 					name='login'

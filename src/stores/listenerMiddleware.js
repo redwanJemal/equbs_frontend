@@ -8,6 +8,15 @@ import {
 	setReferralQueryParameters,
 } from '@/stores/referrals'
 import { buildQueryString } from '@/utils/buildQueryString'
+import { getAllEqubs, setEqubQueryParameters } from './equbs'
+import {
+	GetAllSubscriptions,
+	setSubscriptionQueryParameters,
+} from './subscription'
+import {
+	GetAllTransactions,
+	setTransactionQueryParameters,
+} from './transactions'
 
 const listenerMiddleware = createListenerMiddleware()
 
@@ -78,6 +87,58 @@ listenerMiddleware.startListening({
 			console.error('Error fetching referral ins:', referralsState.error)
 		} else {
 			console.log('Referrals ins fetched successfully')
+		}
+	},
+})
+
+listenerMiddleware.startListening({
+	actionCreator: setEqubQueryParameters,
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState()
+		const queryParameters = state.equbs.queryParameters
+		await listenerApi.dispatch(getAllEqubs(buildQueryString(queryParameters)))
+
+		const equbsState = listenerApi.getState().equbs
+		if (equbsState.error) {
+			console.error('Error fetching equbs:', equbsState.error)
+		} else {
+			console.log('Equbs fetched successfully')
+		}
+	},
+})
+
+listenerMiddleware.startListening({
+	actionCreator: setSubscriptionQueryParameters,
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState()
+		const queryParameters = state.equbSubscription.queryParameters
+		await listenerApi.dispatch(
+			GetAllSubscriptions(buildQueryString(queryParameters))
+		)
+
+		const subscriptionsState = listenerApi.getState().equbSubscription
+		if (subscriptionsState.error) {
+			console.error('Error fetching subscriptions:', subscriptionsState.error)
+		} else {
+			console.log('Subscriptions fetched successfully')
+		}
+	},
+})
+
+listenerMiddleware.startListening({
+	actionCreator: setTransactionQueryParameters,
+	effect: async (action, listenerApi) => {
+		const state = listenerApi.getState()
+		const queryParameters = state.transactions.queryParameters
+		await listenerApi.dispatch(
+			GetAllTransactions(buildQueryString(queryParameters))
+		)
+
+		const transactionsState = listenerApi.getState().transactions
+		if (transactionsState.error) {
+			console.error('Error fetching transactions:', transactionsState.error)
+		} else {
+			console.log('Transactions fetched successfully')
 		}
 	},
 })

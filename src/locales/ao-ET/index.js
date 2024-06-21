@@ -6,5 +6,5 @@ export default {
 	'global.language.chinese': 'Chinese',
 	'global.header.theme.swith_to_dark': 'Switch to Dark',
 	'global.header.theme.swith_to_light': 'Oromoo to light',
-	'global.header.application': 'Electronic Referal System',
+	'global.header.application': 'Ebrish Equb',
 }

@@ -17,8 +17,10 @@ const Dashboard = lazy(() => import('./pages/Dashboard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const LoginPage = lazy(() => import('./pages/Login'))
 const FacilityListPage = lazy(() => import('./pages/facility/list'))
+const EqubPage = lazy(() => import('./pages/EqubPage'))
 const FacilityTypePage = lazy(() => import('./pages/facility/type'))
-const ReferalOutPage = lazy(() => import('./pages/referal/referalOut'))
+const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'))
+const TransactionPage = lazy(() => import('./pages/TransactionPage'))
 const ReferalInPage = lazy(() => import('./pages/referal/referalIn'))
 
 // Preload components
@@ -67,10 +69,10 @@ const AppRoutes = () => {
 							}
 						/>
 						<Route
-							path='/facility-list'
+							path='/equbs'
 							element={
 								<PrivateRoute>
-									<FacilityListPage />
+									<EqubPage />
 								</PrivateRoute>
 							}
 						/>
@@ -83,18 +85,18 @@ const AppRoutes = () => {
 							}
 						/>
 						<Route
-							path='/referral-in'
+							path='/transactions'
 							element={
 								<PrivateRoute>
-									<ReferalInPage />
+									<TransactionPage />
 								</PrivateRoute>
 							}
 						/>
 						<Route
-							path='/referral-out'
+							path='/subscription'
 							element={
 								<PrivateRoute>
-									<ReferalOutPage />
+									<SubscriptionPage />
 								</PrivateRoute>
 							}
 						/>

@@ -21,8 +21,8 @@ const AppMenu = ({ theme }) => {
 
 	const pathToKey = {
 		'/': '1',
-		'/referral-out': '2',
-		'/referral-in': '3',
+		'/subscription': '2',
+		'/transactions': '3',
 		'/referral-feedback': '4',
 		'/chatbot-communication': '5',
 		'/generate-reports': '6',
@@ -32,7 +32,7 @@ const AppMenu = ({ theme }) => {
 		'/catchment-creation': '10',
 		'/catchment-deactivation': '11',
 		'/activity-monitoring': '12',
-		'/facility-list': '13',
+		'/equbs': '13',
 		'/facility-type': '14',
 	}
 
@@ -85,24 +85,28 @@ const AppMenu = ({ theme }) => {
 				title='Facility Management'
 			>
 				<Menu.Item key='13'>
-					<Link to='/facility-list'>Facility List</Link>
+					<Link to='/list'>Facility List</Link>
 				</Menu.Item>
 				<Menu.Item key='14'>
 					<Link to='/facility-type'>Facility Type</Link>
 				</Menu.Item>
 			</SubMenu> */}
 			<Menu.Item key='13' icon={<FileTextOutlined />}>
-				<Link to='/facility-list'>Facility Management</Link>
+				<Link to='/equbs'>Equbs</Link>
 			</Menu.Item>
 			<Menu.Item key='8' icon={<TeamOutlined />}>
 				<Link to='/users'>User Management</Link>
 			</Menu.Item>
-			<SubMenu key='sub1' icon={<UploadOutlined />} title='Referral Management'>
+			<SubMenu
+				key='sub1'
+				icon={<UploadOutlined />}
+				title='Subscription Management'
+			>
 				<Menu.Item key='2'>
-					<Link to='/referral-out'>Referral Out</Link>
+					<Link to='/subscription'>Equb Subscription</Link>
 				</Menu.Item>
 				<Menu.Item key='3'>
-					<Link to='/referral-in'>Referral In</Link>
+					<Link to='/transactions'>Subscription Transaction</Link>
 				</Menu.Item>
 				{/* <Menu.Item key='4'>
 					<Link to='/referral-feedback'>Referral Feedback</Link>

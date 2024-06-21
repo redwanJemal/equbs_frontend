@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 const keycloakConfig = {
-	url: 'http://localhost:18080/realms/referral/protocol/openid-connect/token',
-	clientId: 'qha-referal-public-client',
+	url: 'http://localhost:18080/realms/equb/protocol/openid-connect/token',
+	clientId: 'equb-public-client',
 	grantType: 'password',
 }
 

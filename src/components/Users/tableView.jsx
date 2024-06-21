@@ -48,22 +48,12 @@ const tableView = ({ list, onDetail, onDelete }) => {
 			),
 			fullName: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
-					{item?.firstName} {item?.lastName}
+					{item?.fullName}
 				</div>
 			),
 			email: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
 					{item?.email}
-				</div>
-			),
-			// isActive: (item) => (
-			// 	<div className='table-row-color text-sm leading-[18px] w-[100px]'>
-			// 		{item?.isActive ? 'Active' : 'Inactive'}
-			// 	</div>
-			// ),
-			facilityId: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
-					{item?.facility?.name}
 				</div>
 			),
 			phoneNumber: (item) => (
