@@ -23,7 +23,6 @@ const AppMenu = ({ theme }) => {
 		'/': '1',
 		'/subscription': '2',
 		'/transactions': '3',
-		'/referral-feedback': '4',
 		'/chatbot-communication': '5',
 		'/generate-reports': '6',
 		'/historical-data': '7',
@@ -33,7 +32,6 @@ const AppMenu = ({ theme }) => {
 		'/catchment-deactivation': '11',
 		'/activity-monitoring': '12',
 		'/equbs': '13',
-		'/facility-type': '14',
 	}
 
 	const keyToOpenKey = {
@@ -79,18 +77,6 @@ const AppMenu = ({ theme }) => {
 			<Menu.Item key='1' icon={<DashboardOutlined />}>
 				<Link to='/dashboard'>Dashboard</Link>
 			</Menu.Item>
-			{/* <SubMenu
-				key='sub5'
-				icon={<FileTextOutlined />}
-				title='Facility Management'
-			>
-				<Menu.Item key='13'>
-					<Link to='/list'>Facility List</Link>
-				</Menu.Item>
-				<Menu.Item key='14'>
-					<Link to='/facility-type'>Facility Type</Link>
-				</Menu.Item>
-			</SubMenu> */}
 			<Menu.Item key='13' icon={<FileTextOutlined />}>
 				<Link to='/equbs'>Equbs</Link>
 			</Menu.Item>
@@ -108,12 +94,6 @@ const AppMenu = ({ theme }) => {
 				<Menu.Item key='3'>
 					<Link to='/transactions'>Subscription Transaction</Link>
 				</Menu.Item>
-				{/* <Menu.Item key='4'>
-					<Link to='/referral-feedback'>Referral Feedback</Link>
-				</Menu.Item>
-				<Menu.Item key='5'>
-					<Link to='/chatbot-communication'>Chatbot Communication</Link>
-				</Menu.Item> */}
 			</SubMenu>
 			<SubMenu key='sub2' icon={<FileTextOutlined />} title='Reports'>
 				<Menu.Item key='6'>
@@ -123,14 +103,6 @@ const AppMenu = ({ theme }) => {
 					<Link to='/historical-data'>View Historical Data</Link>
 				</Menu.Item>
 			</SubMenu>
-			{/* <SubMenu key='sub3' icon={<SettingOutlined />} title='User Management'>
-				<Menu.Item key='8'>
-					<Link to='/account-creation'>User Account Creation</Link>
-				</Menu.Item>
-				<Menu.Item key='9'>
-					<Link to='/account-deactivation'>User Account Deactivation</Link>
-				</Menu.Item>
-			</SubMenu> */}
 			<SubMenu
 				key='sub4'
 				icon={<ApartmentOutlined />}

@@ -16,12 +16,9 @@ const UsersPage = lazy(() => import('./pages/Users'))
 const Dashboard = lazy(() => import('./pages/Dashboard'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 const LoginPage = lazy(() => import('./pages/Login'))
-const FacilityListPage = lazy(() => import('./pages/facility/list'))
 const EqubPage = lazy(() => import('./pages/EqubPage'))
-const FacilityTypePage = lazy(() => import('./pages/facility/type'))
 const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'))
 const TransactionPage = lazy(() => import('./pages/TransactionPage'))
-const ReferalInPage = lazy(() => import('./pages/referal/referalIn'))
 
 // Preload components
 const preloadComponents = () => {
@@ -73,14 +70,6 @@ const AppRoutes = () => {
 							element={
 								<PrivateRoute>
 									<EqubPage />
-								</PrivateRoute>
-							}
-						/>
-						<Route
-							path='/facility-type'
-							element={
-								<PrivateRoute>
-									<FacilityTypePage />
 								</PrivateRoute>
 							}
 						/>

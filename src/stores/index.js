@@ -2,8 +2,6 @@ import { configureStore } from '@reduxjs/toolkit'
 import globalReducer from './global.store'
 import userReducer from './users'
 import drawerReducer from './drawerSlice'
-import facilityReducer from './facility'
-import referralsReducer from './referrals'
 import equbReducer from './equbs'
 import subscriptionReducer from './subscription'
 import transactionReducer from './transactions'
@@ -14,8 +12,6 @@ const store = configureStore({
 		drawer: drawerReducer,
 		global: globalReducer,
 		users: userReducer,
-		facilities: facilityReducer,
-		referrals: referralsReducer,
 		equbs: equbReducer,
 		equbSubscription: subscriptionReducer,
 		transactions: transactionReducer,
