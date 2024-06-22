@@ -19,6 +19,7 @@ const LoginPage = lazy(() => import('./pages/Login'))
 const EqubPage = lazy(() => import('./pages/EqubPage'))
 const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'))
 const TransactionPage = lazy(() => import('./pages/TransactionPage'))
+const ChatPage = lazy(() => import('./pages/ChatPage')) // Add this line
 
 // Preload components
 const preloadComponents = () => {
@@ -86,6 +87,14 @@ const AppRoutes = () => {
 							element={
 								<PrivateRoute>
 									<SubscriptionPage />
+								</PrivateRoute>
+							}
+						/>
+						<Route
+							path='/chat'
+							element={
+								<PrivateRoute>
+									<ChatPage />
 								</PrivateRoute>
 							}
 						/>
