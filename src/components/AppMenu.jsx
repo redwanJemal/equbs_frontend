@@ -4,12 +4,14 @@
 import React, { useState, useEffect } from 'react'
 import { Menu } from 'antd'
 import {
-	UploadOutlined,
 	DashboardOutlined,
-	FileTextOutlined,
+	MoneyCollectOutlined,
+	FolderAddOutlined,
+	TransactionOutlined,
+	UserOutlined,
+	FileSearchOutlined,
+	HistoryOutlined,
 	SettingOutlined,
-	TeamOutlined,
-	ApartmentOutlined,
 } from '@ant-design/icons'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -28,25 +30,17 @@ const AppMenu = ({ theme }) => {
 		'/historical-data': '7',
 		'/users': '8',
 		'/account-deactivation': '9',
-		'/catchment-creation': '10',
-		'/catchment-deactivation': '11',
-		'/activity-monitoring': '12',
 		'/equbs': '13',
 	}
 
 	const keyToOpenKey = {
 		2: 'sub1',
 		3: 'sub1',
-		4: 'sub1',
-		5: 'sub1',
 		6: 'sub2',
 		7: 'sub2',
 		8: 'sub3',
 		9: 'sub3',
-		10: 'sub4',
-		11: 'sub4',
-		14: 'sub5',
-		13: 'sub5',
+		13: 'sub4',
 	}
 
 	const selectedKey = pathToKey[location.pathname] || '1'
@@ -72,55 +66,23 @@ const AppMenu = ({ theme }) => {
 			selectedKeys={[selectedKey]}
 			openKeys={openKeys}
 			onOpenChange={handleOpenChange}
-			style={{ height: '100%', display: 'flex', flexDirection: 'column' }}
+			className='h-screen'
+			style={{ display: 'flex', flexDirection: 'column' }}
 		>
 			<Menu.Item key='1' icon={<DashboardOutlined />}>
 				<Link to='/dashboard'>Dashboard</Link>
 			</Menu.Item>
-			<Menu.Item key='13' icon={<FileTextOutlined />}>
+			<Menu.Item key='13' icon={<MoneyCollectOutlined />}>
 				<Link to='/equbs'>Equbs</Link>
 			</Menu.Item>
-			<Menu.Item key='8' icon={<TeamOutlined />}>
-				<Link to='/users'>User Management</Link>
+			<Menu.Item key='2' icon={<FolderAddOutlined />}>
+				<Link to='/subscription'>Equb Subscription</Link>
 			</Menu.Item>
-			<SubMenu
-				key='sub1'
-				icon={<UploadOutlined />}
-				title='Subscription Management'
-			>
-				<Menu.Item key='2'>
-					<Link to='/subscription'>Equb Subscription</Link>
-				</Menu.Item>
-				<Menu.Item key='3'>
-					<Link to='/transactions'>Subscription Transaction</Link>
-				</Menu.Item>
-			</SubMenu>
-			<SubMenu key='sub2' icon={<FileTextOutlined />} title='Reports'>
-				<Menu.Item key='6'>
-					<Link to='/generate-reports'>Generate Reports</Link>
-				</Menu.Item>
-				<Menu.Item key='7'>
-					<Link to='/historical-data'>View Historical Data</Link>
-				</Menu.Item>
-			</SubMenu>
-			<SubMenu
-				key='sub4'
-				icon={<ApartmentOutlined />}
-				title='Catchment Management'
-			>
-				<Menu.Item key='10'>
-					<Link to='/catchment-creation'>Catchment Creation</Link>
-				</Menu.Item>
-				<Menu.Item key='11'>
-					<Link to='/catchment-deactivation'>Catchment Deactivation</Link>
-				</Menu.Item>
-			</SubMenu>
-			<Menu.Item
-				key='settings'
-				icon={<SettingOutlined />}
-				style={{ marginTop: 'auto' }}
-			>
-				<Link to='/settings'>Settings</Link>
+			<Menu.Item key='3' icon={<TransactionOutlined />}>
+				<Link to='/transactions'>Subscription Transaction</Link>
+			</Menu.Item>
+			<Menu.Item key='8' icon={<UserOutlined />}>
+				<Link to='/users'>User Management</Link>
 			</Menu.Item>
 		</Menu>
 	)

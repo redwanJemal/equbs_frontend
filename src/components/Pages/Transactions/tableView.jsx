@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { paymentModeEnum, transactionStatusEnum } from '@/utils/enums'
 import { Button, Tooltip } from 'antd'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
 
@@ -50,8 +51,8 @@ const TransactionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 				</div>
 			),
 			subscriptionName: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
-					{item?.subscriptionName}
+				<div className='table-row-color text-sm leading-[18px] w-[350px]'>
+					{`${item.userFirstName} ${item.userLastName} => ${item.equbName}`}
 				</div>
 			),
 			date: (item) => (
@@ -65,8 +66,8 @@ const TransactionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 				</div>
 			),
 			mode: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[100px]'>
-					{item?.mode}
+				<div className='table-row-color text-sm leading-[18px] w-[50px]'>
+					{paymentModeEnum(item?.mode)}
 				</div>
 			),
 			transactionNumber: (item) => (
@@ -77,6 +78,11 @@ const TransactionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			bankAccount: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
 					{item?.bankAccount}
+				</div>
+			),
+			status: (item) => (
+				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+					{transactionStatusEnum(item.isApproved)}
 				</div>
 			),
 		},

@@ -1,11 +1,15 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
 import { Button, Dropdown, Menu, Tooltip } from 'antd'
 import { FaEdit } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const tableView = ({ list, onDetail, onDelete }) => {
+	const navigate = useNavigate()
+
 	const handleMenuClick = (item, action) => {
 		if (action === 'detail') {
 			onDetail(item?.id)
@@ -14,15 +18,9 @@ const tableView = ({ list, onDetail, onDelete }) => {
 		}
 	}
 
-	const getMenu = (item) => (
-		<Menu onClick={(e) => handleMenuClick(item, e.key)}>
-			<Menu.Item key='detail'>Detail</Menu.Item>
-			<Menu.Item className='hover:!bg-red-600 hover:!text-white' key='delete'>
-				Delete
-			</Menu.Item>
-		</Menu>
-	)
-
+	const handleRedirect = (userId) => {
+		navigate(`/subscription?userId=${userId}`)
+	}
 	return {
 		list: list,
 		theme: {
@@ -36,11 +34,11 @@ const tableView = ({ list, onDetail, onDelete }) => {
 							icon={<FaEdit />}
 						/>
 					</Tooltip>
-					<Tooltip title='delete'>
+					<Tooltip title='subscription'>
 						<Button
 							danger
 							shape='circle'
-							onClick={() => handleMenuClick(item, 'delete')}
+							onClick={() => handleRedirect(item.id)}
 							icon={<BsTrash />}
 						/>
 					</Tooltip>

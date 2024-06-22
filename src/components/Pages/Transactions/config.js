@@ -109,6 +109,13 @@ export const transactionColumnsConfig = [
 		width: 150,
 	},
 	{
+		title: 'Status',
+		dataIndex: 'status',
+		key: 'status',
+		responsive: ['sm', 'md', 'lg'],
+		width: 100,
+	},
+	{
 		title: '',
 		dataIndex: 'actions',
 		key: 'actions',

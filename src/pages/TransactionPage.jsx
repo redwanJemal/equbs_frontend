@@ -19,10 +19,21 @@ const TransactionPage = () => {
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
 
+	const params = new URLSearchParams(location.search)
+	const subscriptionId = params.get('subscriptionId')
+
 	useEffect(() => {
 		// Dispatch the setTransactionQueryParameters action on initial load
-		dispatch(setTransactionQueryParameters({ page: 1, pageSize: 10 }))
-	}, [dispatch])
+		dispatch(
+			setTransactionQueryParameters({
+				page: 1,
+				pageSize: 10,
+				filters: {
+					subscriptionId: subscriptionId,
+				},
+			})
+		)
+	}, [dispatch, subscriptionId])
 
 	const { transactions, loading, meta, highlightedRowId, queryParameters } =
 		useSelector((state) => state.transactions)

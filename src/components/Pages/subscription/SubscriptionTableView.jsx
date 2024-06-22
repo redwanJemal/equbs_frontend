@@ -1,9 +1,13 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { rotationTypeEnum } from '@/utils/enums'
 import { Button, Tooltip } from 'antd'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
+	const navigate = useNavigate()
 	const handleMenuClick = (item, action) => {
 		if (action === 'detail') {
 			onDetail(item?.id)
@@ -14,15 +18,8 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 		}
 	}
 
-	const rotationTypeEnum = (rotationType) => {
-		switch (rotationType) {
-			case 1:
-				return 'Daily'
-			case 2:
-				return 'Weekely'
-			case 3:
-				return 'Monthly'
-		}
+	const handleRedirect = (subscriptionId) => {
+		navigate(`/transactions?subscriptionId=${subscriptionId}`)
 	}
 
 	return {
@@ -38,26 +35,14 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 							icon={<FaEdit />}
 						/>
 					</Tooltip>
-					{item.status == 1 ? (
-						<Tooltip title='Deactivate'>
-							<Button
-								danger
-								shape='circle'
-								onClick={() => handleMenuClick(item, 'delete')}
-								icon={<FaPowerOff />}
-							/>
-						</Tooltip>
-					) : (
-						<Tooltip title='Reactivate'>
-							<Button
-								className='!bg-green-500 !border-green-500'
-								type='primary'
-								shape='circle'
-								onClick={() => handleMenuClick(item, 'reactive')}
-								icon={<FaSync />}
-							/>
-						</Tooltip>
-					)}
+					<Tooltip title='Transactions'>
+						<Button
+							danger
+							shape='circle'
+							onClick={() => handleRedirect(item.id)}
+							icon={<FaPowerOff />}
+						/>
+					</Tooltip>
 				</div>
 			),
 			userName: (item) => (

@@ -16,10 +16,24 @@ import SubscriptionTableView from '@/components/Pages/subscription/SubscriptionT
 const SubscriptionPage = () => {
 	const dispatch = useDispatch()
 	const [selectedData, setSelectedData] = useState(null)
+
+	// Get userId from URL query parameters
+	const params = new URLSearchParams(location.search)
+	const userId = params.get('userId')
+
 	useEffect(() => {
 		// Dispatch the setSubscriptionQueryParameters action on initial load
-		dispatch(setSubscriptionQueryParameters({ page: 1, pageSize: 10 }))
-	}, [dispatch])
+		dispatch(
+			setSubscriptionQueryParameters({
+				page: 1,
+				pageSize: 10,
+				filters: {
+					userId: userId,
+					isCompleted: false,
+				},
+			})
+		)
+	}, [dispatch, userId])
 
 	const { subscriptions, loading, meta, highlightedRowId, queryParameters } =
 		useSelector((state) => state.equbSubscription)
