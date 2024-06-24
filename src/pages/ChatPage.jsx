@@ -32,6 +32,7 @@ const ChatPage = () => {
 						console.log('Connected!')
 
 						connection.on('ReceiveMessage', (senderId, message) => {
+							console.log('Message received:', { senderId, message })
 							setMessages((messages) => [...messages, { senderId, message }])
 						})
 					})
@@ -49,19 +50,19 @@ const ChatPage = () => {
 			try {
 				const recipientArray = recipientIds.split(',').map((id) => id.trim())
 				if (recipientArray.length > 1) {
-					console.log('we are here sending for many users')
+					console.log('Sending message to multiple users')
 					await connection.send(
 						'SendMessageToUsers',
 						recipientArray,
-						'3564fe7c-6903-48f7-a804-04914f34f0fc',
+						'7907791d-4991-4f93-bb46-c16a408636ae',
 						message
 					)
 				} else {
-					console.log('we are here sending for single user')
+					console.log('Sending message to a single user')
 					await connection.send(
 						'SendMessageToUser',
 						recipientArray[0],
-						'3564fe7c-6903-48f7-a804-04914f34f0fc',
+						'7907791d-4991-4f93-bb46-c16a408636ae',
 						message
 					)
 				}
