@@ -1,19 +1,29 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { Layout, Button, Dropdown, Avatar, Menu, theme as antTheme } from 'antd'
+import {
+	Layout,
+	Button,
+	Dropdown,
+	Avatar,
+	Menu,
+	Badge,
+	theme as antTheme,
+} from 'antd'
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,
 	UserOutlined,
 	LogoutOutlined,
 	GlobalOutlined,
+	MessageOutlined,
 } from '@ant-design/icons'
 import ThemeToggleButton from './ThemeToggleButton'
 import LanguageMenu from './LanguageMenu'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '@/stores/users'
+import { useSignalR } from '@/contexts/SignalRProvider'
 
 const { Header } = Layout
 
@@ -45,6 +55,13 @@ const ProfileMenu = () => {
 const HeaderBar = ({ collapsed, toggle }) => {
 	const token = antTheme.useToken()
 	const profile = useSelector((state) => state.users.profile)
+	const { unreadCount, clearUnreadCount } = useSignalR()
+	const navigate = useNavigate()
+
+	const handleChatIconClick = () => {
+		clearUnreadCount()
+		navigate('/chat')
+	}
 
 	return (
 		<Header
@@ -61,6 +78,15 @@ const HeaderBar = ({ collapsed, toggle }) => {
 				<Dropdown overlay={<LanguageMenu />} trigger={['click']}>
 					<Button type='secondary' icon={<GlobalOutlined />}></Button>
 				</Dropdown>
+				<Button
+					type='text'
+					icon={
+						<Badge count={unreadCount}>
+							<MessageOutlined />
+						</Badge>
+					}
+					onClick={handleChatIconClick}
+				/>
 				<Dropdown
 					overlay={<ProfileMenu />}
 					trigger={['click']}

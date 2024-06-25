@@ -14,6 +14,7 @@ import AppRoutes from './Routes'
 import { setGlobalState } from './stores/global.store'
 import { getUserInfo } from './auth'
 import { setUserProfile } from './stores/users'
+import { SignalRProvider } from './contexts/SignalRProvider'
 
 const App = () => {
 	const { locale } = useSelector((state) => state.global)
@@ -74,37 +75,40 @@ const App = () => {
 	}, [dispatch])
 
 	return (
-		<ConfigProvider
-			locale={getAntdLocale()}
-			componentSize='middle'
-			theme={{
-				token: { colorPrimary: '#9eadaa' },
-				algorithm:
-					theme === 'dark'
-						? antdTheme.darkAlgorithm
-						: antdTheme.defaultAlgorithm,
-			}}
-		>
-			<IntlProvider
-				locale={locale.split('_')[0]}
-				messages={localeConfig[locale]}
+		<SignalRProvider>
+			{' '}
+			{/* Wrap your app with SignalRProvider */}
+			<ConfigProvider
+				locale={getAntdLocale()}
+				componentSize='middle'
+				theme={{
+					token: { colorPrimary: '#9eadaa' },
+					algorithm:
+						theme === 'dark'
+							? antdTheme.darkAlgorithm
+							: antdTheme.defaultAlgorithm,
+				}}
 			>
-				<Spin
-					spinning={loading}
-					className='app-loading-wrapper'
-					style={{
-						backgroundColor:
-							theme === 'dark'
-								? 'rgba(0, 0, 0, 0.44)'
-								: 'rgba(255, 255, 255, 0.44)',
-					}}
-					tip={<LocaleFormatter id='global.tips.loading' />}
+				<IntlProvider
+					locale={locale.split('_')[0]}
+					messages={localeConfig[locale]}
 				>
-					{/* <ResponsiveLayout /> */}
-					<AppRoutes />
-				</Spin>
-			</IntlProvider>
-		</ConfigProvider>
+					<Spin
+						spinning={loading}
+						className='app-loading-wrapper'
+						style={{
+							backgroundColor:
+								theme === 'dark'
+									? 'rgba(0, 0, 0, 0.44)'
+									: 'rgba(255, 255, 255, 0.44)',
+						}}
+						tip={<LocaleFormatter id='global.tips.loading' />}
+					>
+						<AppRoutes />
+					</Spin>
+				</IntlProvider>
+			</ConfigProvider>
+		</SignalRProvider>
 	)
 }
 
