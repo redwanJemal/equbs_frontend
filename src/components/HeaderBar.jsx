@@ -12,11 +12,14 @@ import {
 import ThemeToggleButton from './ThemeToggleButton'
 import LanguageMenu from './LanguageMenu'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogout } from '@/stores/users'
 
 const { Header } = Layout
 
 const ProfileMenu = () => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const profileMenuItems = [
 		{
@@ -30,8 +33,7 @@ const ProfileMenu = () => {
 			icon: <LogoutOutlined />,
 			label: 'Logout',
 			onClick: () => {
-				// Perform logout action here, then navigate to the login page
-				// dispatch(logoutAction());
+				dispatch(userLogout())
 				navigate('/login')
 			},
 		},
@@ -42,6 +44,7 @@ const ProfileMenu = () => {
 
 const HeaderBar = ({ collapsed, toggle }) => {
 	const token = antTheme.useToken()
+	const profile = useSelector((state) => state.users.profile)
 
 	return (
 		<Header
@@ -65,7 +68,7 @@ const HeaderBar = ({ collapsed, toggle }) => {
 				>
 					<div className='flex items-center cursor-pointer'>
 						<Avatar icon={<UserOutlined />} />
-						<span className='ml-2'>Redwan J</span>
+						<span className='ml-2'>{profile?.name}</span>
 					</div>
 				</Dropdown>
 			</div>

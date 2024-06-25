@@ -12,6 +12,8 @@ import enUS from './locales/en-US'
 import zhCN from './locales/zh-CN'
 import AppRoutes from './Routes'
 import { setGlobalState } from './stores/global.store'
+import { getUserInfo } from './auth'
+import { setUserProfile } from './stores/users'
 
 const App = () => {
 	const { locale } = useSelector((state) => state.global)
@@ -63,6 +65,13 @@ const App = () => {
 		}
 		return antdLocales[locale] || enUS
 	}
+
+	useEffect(() => {
+		const userInfo = getUserInfo()
+		if (userInfo) {
+			dispatch(setUserProfile(userInfo))
+		}
+	}, [dispatch])
 
 	return (
 		<ConfigProvider

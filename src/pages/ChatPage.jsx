@@ -1,19 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import * as signalR from '@microsoft/signalr'
 import { getToken } from '../auth' // Import the getToken function to retrieve the token
+import notificationSoundFile from '@/assets/notification.wav' // Import the notification sound file
+import { useSelector } from 'react-redux'
 
 const ChatPage = () => {
 	const [connection, setConnection] = useState(null)
 	const [messages, setMessages] = useState([])
 	const [message, setMessage] = useState('')
 	const [recipientIds, setRecipientIds] = useState('')
+	const profile = useSelector((state) => state.users.profile)
+
+	// Create a ref to store the audio element
+	const notificationSound = new Audio(notificationSoundFile)
 
 	useEffect(() => {
 		const token = getToken() // Retrieve the token
 
 		const newConnection = new signalR.HubConnectionBuilder()
-			.withUrl('https://localhost:59101/chathub', {
+			.withUrl('https://localhost:55296/chathub', {
 				accessTokenFactory: () => token, // Provide the token for authentication
 				withCredentials: true, // Include credentials
 			})
@@ -34,6 +41,11 @@ const ChatPage = () => {
 						connection.on('ReceiveMessage', (senderId, message) => {
 							console.log('Message received:', { senderId, message })
 							setMessages((messages) => [...messages, { senderId, message }])
+
+							// Play the notification sound only if the message is not sent by the logged-in user
+							if (senderId !== profile?.identityId) {
+								notificationSound.play()
+							}
 						})
 					})
 					.catch((e) => console.log('Connection failed: ', e))
@@ -51,20 +63,10 @@ const ChatPage = () => {
 				const recipientArray = recipientIds.split(',').map((id) => id.trim())
 				if (recipientArray.length > 1) {
 					console.log('Sending message to multiple users')
-					await connection.send(
-						'SendMessageToUsers',
-						recipientArray,
-						'7907791d-4991-4f93-bb46-c16a408636ae',
-						message
-					)
+					await connection.send('SendMessageToUsers', recipientArray, message)
 				} else {
 					console.log('Sending message to a single user')
-					await connection.send(
-						'SendMessageToUser',
-						recipientArray[0],
-						'7907791d-4991-4f93-bb46-c16a408636ae',
-						message
-					)
+					await connection.send('SendMessageToUser', recipientArray[0], message)
 				}
 				setMessage('')
 			} catch (e) {

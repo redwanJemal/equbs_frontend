@@ -12,7 +12,8 @@ const initialState = {
 	detailLoading: false,
 	users: [],
 	selectedUser: null,
-	highlightedRowId: null, // Add highlightedRowId to state
+	highlightedRowId: null,
+	profile: null, // Add profile state
 	error: null,
 	meta: {
 		limit: 10,
@@ -20,7 +21,7 @@ const initialState = {
 	},
 }
 
-const userlSlice = createSlice({
+const userSlice = createSlice({
 	name: 'user',
 	initialState,
 	reducers: {
@@ -28,11 +29,21 @@ const userlSlice = createSlice({
 			state.queryParameters = { ...state.queryParameters, ...action.payload }
 		},
 		resetSelectedUser(state) {
-			console.log('setting selected user')
 			state.selectedUser = null
 		},
 		resetHighlightedRow(state) {
 			state.highlightedRowId = null
+		},
+		setUserProfile(state, action) {
+			state.profile = action.payload
+			console.log(action.payload)
+			localStorage.setItem('user_info', JSON.stringify(action.payload)) // Save profile to local storage
+		},
+		userLogout(state) {
+			state.profile = null
+			localStorage.removeItem('access_token')
+			localStorage.removeItem('refresh_token')
+			localStorage.removeItem('user_info')
 		},
 	},
 	extraReducers: (builder) => {
@@ -54,7 +65,6 @@ const userlSlice = createSlice({
 				state.detailLoading = 'pending'
 			})
 			.addCase(GetUserById.fulfilled, (state, action) => {
-				console.log(action.payload.data)
 				state.selectedUser = action.payload.data
 				state.detailLoading = 'idle'
 				state.loading = 'idle'
@@ -70,7 +80,7 @@ const userlSlice = createSlice({
 			.addCase(CreateUser.fulfilled, (state, action) => {
 				state.users.unshift(action.payload.data)
 				state.loading = 'idle'
-				state.highlightedRowId = action.payload.data.id // Set highlightedRowId
+				state.highlightedRowId = action.payload.data.id
 			})
 			.addCase(CreateUser.rejected, (state, action) => {
 				state.loading = 'idle'
@@ -85,7 +95,7 @@ const userlSlice = createSlice({
 					user.id === updatedUser.id ? updatedUser : user
 				)
 				state.loading = 'idle'
-				state.highlightedRowId = updatedUser.id // Set highlightedRowId
+				state.highlightedRowId = updatedUser.id
 			})
 			.addCase(UpdateUser.rejected, (state, action) => {
 				state.loading = 'idle'
@@ -110,8 +120,10 @@ export const {
 	setUserQueryParameters,
 	resetSelectedUser,
 	resetHighlightedRow,
-} = userlSlice.actions
+	setUserProfile,
+	userLogout,
+} = userSlice.actions
 
 export { CreateUser, UpdateUser, GetAllUsers, GetUserById, DeleteUser }
 
-export default userlSlice.reducer
+export default userSlice.reducer

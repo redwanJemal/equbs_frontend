@@ -1,24 +1,29 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Form, Input, Button, Checkbox, message, theme } from 'antd'
+import { Form, Input, Button, Checkbox, message } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { login } from '../auth'
+import { useDispatch } from 'react-redux'
 import Logo from '@/assets/equb.png'
+import { login } from '@/auth'
+import { setUserProfile, userLogout } from '@/stores/users'
 
 const LoginForm = () => {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const [loading, setLoading] = useState(false)
 
 	const onFinish = async (values) => {
 		setLoading(true)
 		try {
-			await login(values.username, values.password)
+			const { userInfo } = await login(values.username, values.password)
+			dispatch(setUserProfile(userInfo)) // Save the user profile to the Redux store
 			message.success('Login successful!')
 			navigate('/dashboard') // Navigate to the dashboard page
 		} catch (error) {
 			console.error('Login failed:', error)
 			message.error('Login failed. Please check your credentials.')
+			dispatch(userLogout()) // Clear the user profile in case of login failure
 		} finally {
 			setLoading(false)
 		}
