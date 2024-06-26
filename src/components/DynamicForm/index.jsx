@@ -13,11 +13,58 @@ import TagInput from './TagInput'
 import DatePickerInput from './DatePickerInput'
 import RadioInput from './RadioInput'
 import CheckboxInput from './CheckboxInput'
-import PasswordInput from './PasswordInput' // Import the new PasswordInput component
+import PasswordInput from './PasswordInput'
+import MultiSelectApiInput from './MultiSelectApiInput'
+import withConditionalRendering from './withConditionalRendering'
 
-// Utility function to check if two objects are equal
-const deepEqual = (obj1, obj2) => {
-	return JSON.stringify(obj1) === JSON.stringify(obj2)
+const deepEqual = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2)
+
+// Wrap field components with the HOC
+const WrappedTextInput = withConditionalRendering(TextInput)
+const WrappedNumberInput = withConditionalRendering(NumberInput)
+const WrappedSelectInput = withConditionalRendering(SelectInput)
+const WrappedSelectApiInput = withConditionalRendering(SelectApiInput)
+const WrappedMultiSelectApiInput = withConditionalRendering(MultiSelectApiInput)
+const WrappedKeyValueInput = withConditionalRendering(KeyValueInput)
+const WrappedTextAreaInput = withConditionalRendering(TextAreaInput)
+const WrappedRangePickerInput = withConditionalRendering(RangePickerInput)
+const WrappedTagInput = withConditionalRendering(TagInput)
+const WrappedDatePickerInput = withConditionalRendering(DatePickerInput)
+const WrappedRadioInput = withConditionalRendering(RadioInput)
+const WrappedCheckboxInput = withConditionalRendering(CheckboxInput)
+const WrappedPasswordInput = withConditionalRendering(PasswordInput)
+
+const renderField = (field, formik) => {
+	switch (field.type) {
+		case 'text':
+			return <WrappedTextInput field={field} formik={formik} />
+		case 'number':
+			return <WrappedNumberInput field={field} formik={formik} />
+		case 'select':
+			return <WrappedSelectInput field={field} formik={formik} />
+		case 'select_api':
+			return <WrappedSelectApiInput field={field} formik={formik} />
+		case 'multi_select_api':
+			return <WrappedMultiSelectApiInput field={field} formik={formik} />
+		case 'key_value':
+			return <WrappedKeyValueInput field={field} formik={formik} />
+		case 'text_area':
+			return <WrappedTextAreaInput field={field} formik={formik} />
+		case 'range_picker':
+			return <WrappedRangePickerInput field={field} formik={formik} />
+		case 'tag':
+			return <WrappedTagInput field={field} formik={formik} />
+		case 'date_picker':
+			return <WrappedDatePickerInput field={field} formik={formik} />
+		case 'radio':
+			return <WrappedRadioInput field={field} formik={formik} />
+		case 'checkbox':
+			return <WrappedCheckboxInput field={field} formik={formik} />
+		case 'password':
+			return <WrappedPasswordInput field={field} formik={formik} />
+		default:
+			return null
+	}
 }
 
 const DynamicFormComponent = ({
@@ -28,48 +75,29 @@ const DynamicFormComponent = ({
 	hideSubmitForm = false,
 	initialValues,
 }) => {
-	const renderField = (field) => {
-		switch (field.type) {
-			case 'text':
-				return <TextInput field={field} formik={formik} />
-			case 'number':
-				return <NumberInput field={field} formik={formik} />
-			case 'select':
-				return <SelectInput field={field} formik={formik} />
-			case 'select_api':
-				return <SelectApiInput field={field} formik={formik} />
-			case 'key_value':
-				return <KeyValueInput field={field} formik={formik} />
-			case 'text_area':
-				return <TextAreaInput field={field} formik={formik} />
-			case 'range_picker':
-				return <RangePickerInput field={field} formik={formik} />
-			case 'tag':
-				return <TagInput field={field} formik={formik} />
-			case 'date_picker':
-				return <DatePickerInput field={field} formik={formik} />
-			case 'radio':
-				return <RadioInput field={field} formik={formik} />
-			case 'checkbox':
-				return <CheckboxInput field={field} formik={formik} />
-			case 'password':
-				return <PasswordInput field={field} formik={formik} /> // Add case for password field
-			default:
-				return null
-		}
-	}
-
 	const isFormDirty = !deepEqual(formik.values, initialValues)
+
+	// Filter visible fields
+	const visibleFields = fieldConfigs.filter((field) => {
+		if (field.dependentOn) {
+			const dependentFieldValue = formik.values[field.dependentOn.field]
+			return (
+				dependentFieldValue === field.dependentOn.value ||
+				(field.dependentOn.value === null && !!dependentFieldValue)
+			)
+		}
+		return true
+	})
 
 	return (
 		<Form onFinish={formik.handleSubmit} layout='vertical'>
 			<Row gutter={16}>
-				{fieldConfigs.map((field) => (
+				{visibleFields.map((field) => (
 					<Col
 						span={field.width === 'full' ? 24 : 12} // Full width for key_value and text_area fields
 						key={field.id}
 					>
-						{renderField(field)}
+						{renderField(field, formik)}
 					</Col>
 				))}
 			</Row>
@@ -94,7 +122,7 @@ DynamicFormComponent.propTypes = {
 	formik: PropTypes.object.isRequired,
 	isLoading: PropTypes.bool,
 	actionButton: PropTypes.node,
-	hideSubmitForm: PropTypes.object.isRequired,
+	hideSubmitForm: PropTypes.bool.isRequired,
 	initialValues: PropTypes.object.isRequired, // Add prop type for initial values
 }
 

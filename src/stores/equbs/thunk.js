@@ -41,9 +41,9 @@ const getAllEqubs = createAsyncThunk('equbs/getAll', async (params) => {
 
 const getEqubById = createAsyncThunk(
 	'equbs/getById',
-	async (id, { rejectWithValue }) => {
+	async (payload, { rejectWithValue }) => {
 		try {
-			const response = await api.getEqubById(id)
+			const response = await api.getEqubById(payload.id)
 			const data = response.data
 			const status = response.status
 			return { data, status }

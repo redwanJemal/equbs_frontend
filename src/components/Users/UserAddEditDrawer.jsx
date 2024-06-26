@@ -1,9 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React, { useMemo, useRef, useState, useEffect } from 'react'
+import { Form, Select, Spin, message, Drawer, Button } from 'antd'
+import PropTypes from 'prop-types'
+import debounce from 'lodash/debounce'
+import axiosInstance from '@/middlewares/axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Drawer, message } from 'antd'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { UserFieldConfigs } from './config'
@@ -37,7 +39,7 @@ const UserAddEditDrawer = () => {
 		password: '',
 		email: '',
 		isActive: '',
-		facilityId: '',
+		roles: [],
 		phoneNumber: '',
 	}
 
@@ -71,7 +73,7 @@ const UserAddEditDrawer = () => {
 				password: selectedUser?.password || '',
 				email: selectedUser?.email || '',
 				isActive: selectedUser?.isActive ? 'true' : 'false',
-				facilityId: selectedUser?.facility?.facilityId || '',
+				roles: selectedUser?.roles || [],
 				phoneNumber: selectedUser?.phoneNumber || '',
 			})
 		}

@@ -48,6 +48,17 @@ export const UserFieldConfigs = [
 		required: true,
 		validation: Yup.string().required('Phone Number is required'),
 	},
+	{
+		id: 'roles',
+		name: 'roles',
+		type: 'multi_select_api',
+		apiUrl: '/api/v1/roles', // The API endpoint to fetch roles
+		placeholder: 'Select roles',
+		label: 'Roles',
+		required: true,
+		validation: Yup.array().min(1, 'At least one role is required'),
+		optionLabelKey: 'name', // The key to use as the label in the options
+	},
 ]
 
 export const userColumnsConfig = [
