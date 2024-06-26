@@ -1,30 +1,14 @@
-import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
-
-const keycloakConfig = {
-	url: 'http://localhost:18080/realms/equb/protocol/openid-connect/token',
-	clientId: 'equb-public-client',
-	grantType: 'password',
-}
+import axiosInstance from './middlewares/axios'
 
 export const login = async (username, password) => {
 	try {
-		const response = await axios.post(
-			keycloakConfig.url,
-			new URLSearchParams({
-				client_id: keycloakConfig.clientId,
-				grant_type: keycloakConfig.grantType,
-				username: username,
-				password: password,
-			}),
-			{
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-				},
-			}
-		)
+		const response = await axiosInstance.post('/api/v1/auth/login', {
+			username,
+			password,
+		})
 
-		const { access_token, refresh_token } = response.data
+		const { access_token, refresh_token, roles } = response.data
 
 		// Store tokens in localStorage or sessionStorage
 		localStorage.setItem('access_token', access_token)
@@ -38,6 +22,7 @@ export const login = async (username, password) => {
 			email: decodedToken.email,
 			email_verified: decodedToken.email_verified,
 			identityId: decodedToken.sub,
+			roles: roles, // Add roles here
 		}
 
 		// Store user info in localStorage or sessionStorage

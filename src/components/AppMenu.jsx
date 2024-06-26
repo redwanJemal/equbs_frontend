@@ -9,17 +9,17 @@ import {
 	FolderAddOutlined,
 	TransactionOutlined,
 	UserOutlined,
-	FileSearchOutlined,
-	HistoryOutlined,
-	SettingOutlined,
 } from '@ant-design/icons'
 import { Link, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const { SubMenu } = Menu
 
 const AppMenu = ({ theme }) => {
 	const location = useLocation()
 	const [openKeys, setOpenKeys] = useState([])
+
+	const userRoles = useSelector((state) => state.users.profile?.roles || [])
 
 	const pathToKey = {
 		'/': '1',
@@ -59,6 +59,10 @@ const AppMenu = ({ theme }) => {
 		setOpenKeys(latestOpenKey ? [latestOpenKey] : [])
 	}
 
+	const hasRole = (roles) => {
+		return roles.some((role) => userRoles.includes(role))
+	}
+
 	return (
 		<Menu
 			theme={theme}
@@ -72,18 +76,26 @@ const AppMenu = ({ theme }) => {
 			<Menu.Item key='1' icon={<DashboardOutlined />}>
 				<Link to='/dashboard'>Dashboard</Link>
 			</Menu.Item>
-			<Menu.Item key='13' icon={<MoneyCollectOutlined />}>
-				<Link to='/equbs'>Equbs</Link>
-			</Menu.Item>
-			<Menu.Item key='2' icon={<FolderAddOutlined />}>
-				<Link to='/subscription'>Equb Subscription</Link>
-			</Menu.Item>
-			<Menu.Item key='3' icon={<TransactionOutlined />}>
-				<Link to='/transactions'>Subscription Transaction</Link>
-			</Menu.Item>
-			<Menu.Item key='8' icon={<UserOutlined />}>
-				<Link to='/users'>User Management</Link>
-			</Menu.Item>
+			{hasRole(['Administrator', 'Member']) && (
+				<Menu.Item key='13' icon={<MoneyCollectOutlined />}>
+					<Link to='/equbs'>Equbs</Link>
+				</Menu.Item>
+			)}
+			{hasRole(['Administrator', 'Treasurer', 'Member']) && (
+				<Menu.Item key='2' icon={<FolderAddOutlined />}>
+					<Link to='/subscription'>Equb Subscription</Link>
+				</Menu.Item>
+			)}
+			{hasRole(['Administrator', 'Treasurer', 'Member']) && (
+				<Menu.Item key='3' icon={<TransactionOutlined />}>
+					<Link to='/transactions'>Subscription Transaction</Link>
+				</Menu.Item>
+			)}
+			{hasRole(['Administrator']) && (
+				<Menu.Item key='8' icon={<UserOutlined />}>
+					<Link to='/users'>User Management</Link>
+				</Menu.Item>
+			)}
 		</Menu>
 	)
 }
