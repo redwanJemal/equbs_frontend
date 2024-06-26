@@ -53,3 +53,23 @@ export const transactionStatusEnum = (transactionStatus) => {
 			return 'Unknown'
 	}
 }
+
+/**
+ * Converts a transaction status number to a string.
+ * @param {number} transactionStatus - The transaction status (1, 2, 3).
+ * @returns {string} - The string representation of the transaction status.
+ */
+export const userStatusEnum = (userStatus) => {
+	switch (userStatus) {
+		case 0:
+			return 'Inactive'
+		case 1:
+			return 'Active'
+		case 2:
+			return 'Pending'
+		case 4:
+			return 'Suspended'
+		default:
+			return 'Unknown'
+	}
+}

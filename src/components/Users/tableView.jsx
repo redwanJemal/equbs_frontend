@@ -6,6 +6,7 @@ import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
 import { Button, Dropdown, Menu, Tooltip } from 'antd'
 import { FaEdit } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import { userStatusEnum } from '@/utils/enums'
 
 const tableView = ({ list, onDetail, onDelete }) => {
 	const navigate = useNavigate()
@@ -57,6 +58,11 @@ const tableView = ({ list, onDetail, onDelete }) => {
 			phoneNumber: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
 					{item?.phoneNumber}
+				</div>
+			),
+			status: (item) => (
+				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+					{userStatusEnum(item?.status)}
 				</div>
 			),
 			roles: (item) => (

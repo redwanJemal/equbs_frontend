@@ -91,6 +91,13 @@ export const userColumnsConfig = [
 		width: 150,
 	},
 	{
+		title: 'Status',
+		dataIndex: 'status',
+		key: 'status',
+		responsive: ['sm', 'md', 'lg'],
+		width: 150,
+	},
+	{
 		title: '',
 		dataIndex: 'actions',
 		key: 'actions',

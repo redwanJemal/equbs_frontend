@@ -20,7 +20,7 @@ const ChatPage = () => {
 		const token = getToken() // Retrieve the token
 
 		const newConnection = new signalR.HubConnectionBuilder()
-			.withUrl('https://localhost:55296/chathub', {
+			.withUrl('http://localhost:5000/chathub', {
 				accessTokenFactory: () => token, // Provide the token for authentication
 				withCredentials: true, // Include credentials
 			})
