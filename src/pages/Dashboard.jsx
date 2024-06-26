@@ -4,30 +4,32 @@ import DashboardStatCard from '@/components/DashboardStatCard'
 import BarChartComponent from '@/components/charts/BarChartComponent'
 import LineChartComponent from '@/components/charts/LineChartComponent'
 import PieChartComponent from '@/components/charts/PieChartComponent'
+import {
+	TransactionOutlined,
+	MoneyCollectOutlined,
+	UserOutlined,
+} from '@ant-design/icons'
 
 const sampleData = [
 	{
 		id: 1,
 		title: 'Users',
-		count: 455,
+		icon: UserOutlined,
+		count: 14,
 		class: '',
 	},
 	{
 		id: 2,
-		title: 'Facilities',
-		count: 455,
+		icon: TransactionOutlined,
+		title: 'Completed Equbs',
+		count: 20,
 		class: '',
 	},
 	{
 		id: 3,
-		title: 'Referal In',
-		count: 455,
-		class: '',
-	},
-	{
-		id: 4,
-		title: 'Referal Out',
-		count: 50,
+		icon: MoneyCollectOutlined,
+		title: 'Equbs Incomplete',
+		count: 16,
 		class: '',
 	},
 ]
@@ -51,12 +53,13 @@ const Dashboard = () => {
 	return (
 		<div className='p-4'>
 			<h1 className='text-2xl font-bold'>Dashboard</h1>
-			<div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-3 lg:grid-cols-4'>
+			<div className='mt-5 grid grid-cols-1 gap-8 sm:grid-cols-3'>
 				{sampleData.map((data) => (
 					<DashboardStatCard
 						key={data.id}
 						loading={'idle'}
 						title={data.title}
+						Icon={data.icon}
 						totalCount={data.count}
 					/>
 				))}

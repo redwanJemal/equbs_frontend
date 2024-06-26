@@ -59,6 +59,11 @@ const tableView = ({ list, onDetail, onDelete }) => {
 					{item?.phoneNumber}
 				</div>
 			),
+			roles: (item) => (
+				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+					{item?.roles?.map((role) => role.roleName).join(', ')}
+				</div>
+			),
 		},
 	}
 }

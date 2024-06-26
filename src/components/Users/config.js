@@ -84,6 +84,13 @@ export const userColumnsConfig = [
 		width: 150,
 	},
 	{
+		title: 'Roles',
+		dataIndex: 'roles',
+		key: 'roles',
+		responsive: ['sm', 'md', 'lg'],
+		width: 150,
+	},
+	{
 		title: '',
 		dataIndex: 'actions',
 		key: 'actions',
