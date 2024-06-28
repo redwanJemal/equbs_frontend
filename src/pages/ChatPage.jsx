@@ -7,6 +7,8 @@ import notificationSoundFile from '@/assets/notification.wav' // Import the noti
 import { useSelector } from 'react-redux'
 
 const ChatPage = () => {
+	const BASE_URL = import.meta.env.VITE_BASE_URL
+
 	const [connection, setConnection] = useState(null)
 	const [messages, setMessages] = useState([])
 	const [message, setMessage] = useState('')
@@ -20,7 +22,7 @@ const ChatPage = () => {
 		const token = getToken() // Retrieve the token
 
 		const newConnection = new signalR.HubConnectionBuilder()
-			.withUrl('http://localhost:5000/chathub', {
+			.withUrl(`${BASE_URL}chathub`, {
 				accessTokenFactory: () => token, // Provide the token for authentication
 				withCredentials: true, // Include credentials
 			})
