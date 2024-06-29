@@ -72,12 +72,12 @@ const TransactionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			),
 			transactionNumber: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.transactionNumber}
+					{item?.transactionNumber ?? '-'}
 				</div>
 			),
 			bankAccount: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.bankAccount}
+					{item?.bankAccount ?? '-'}
 				</div>
 			),
 			status: (item) => (

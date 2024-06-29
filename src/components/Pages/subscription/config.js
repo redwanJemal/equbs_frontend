@@ -109,6 +109,13 @@ export const subscriptionColumnsConfig = [
 		width: 150,
 	},
 	{
+		title: 'Remaining Days',
+		dataIndex: 'remainingDays',
+		key: 'remainingDays',
+		responsive: ['sm', 'md', 'lg'],
+		width: 150,
+	},
+	{
 		title: '',
 		dataIndex: 'actions',
 		key: 'actions',

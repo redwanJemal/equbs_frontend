@@ -5,21 +5,12 @@ export const TransactionFieldConfigs = [
 		id: 'subscriptionId',
 		name: 'subscriptionId',
 		type: 'select_api',
-		optionLabelKey: 'subscriptionName', // Assuming there's a field to identify subscription name
+		optionLabelKey: 'equbName', // Adjusted to show Equb name
 		placeholder: 'Select Subscription',
 		label: 'Subscription',
 		required: true,
 		apiUrl: 'api/v1/equb-subscription',
 		validation: Yup.string().required('Subscription is required'),
-	},
-	{
-		id: 'date',
-		name: 'date',
-		type: 'date',
-		placeholder: 'Select date',
-		label: 'Date',
-		required: true,
-		validation: Yup.date().required('Date is required'),
 	},
 	{
 		id: 'amount',
@@ -31,14 +22,15 @@ export const TransactionFieldConfigs = [
 		validation: Yup.number()
 			.required('Amount is required')
 			.positive('Amount must be positive'),
+		disabled: true,
 	},
 	{
 		id: 'mode',
 		name: 'mode',
 		type: 'select',
 		options: [
-			{ label: 'Cash', value: 'Cash' },
-			{ label: 'Transfer', value: 'Transfer' },
+			{ label: 'Cash', value: 1 },
+			{ label: 'Transfer', value: 2 },
 		],
 		placeholder: 'Select mode',
 		label: 'Mode',
@@ -62,6 +54,15 @@ export const TransactionFieldConfigs = [
 		label: 'Bank Account',
 		required: false,
 		validation: Yup.string().nullable(),
+	},
+	{
+		id: 'date',
+		name: 'date',
+		type: 'date_picker',
+		placeholder: 'Select date',
+		label: 'Date',
+		required: true,
+		validation: Yup.date().required('Date is required'),
 	},
 ]
 

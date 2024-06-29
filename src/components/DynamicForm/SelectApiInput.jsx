@@ -58,6 +58,22 @@ const SelectApiInput = ({ field, formik }) => {
 		}
 	}, [formik.values[field.name], field.apiUrl])
 
+	const handleChange = (value) => {
+		const selectedOption = options.find((option) => option.id === value)
+		if (selectedOption) {
+			formik.setFieldValue(field.name, value)
+			// Set other fields based on the selected option
+			if (field.dependentFields) {
+				field.dependentFields.forEach((dependentField) => {
+					formik.setFieldValue(
+						dependentField.name,
+						selectedOption[dependentField.key]
+					)
+				})
+			}
+		}
+	}
+
 	return (
 		<Form.Item
 			key={field.id}
@@ -76,7 +92,7 @@ const SelectApiInput = ({ field, formik }) => {
 				name={field.name}
 				placeholder={field.placeholder}
 				value={formik.values[field.name]}
-				onChange={(value) => formik.setFieldValue(field.name, value)}
+				onChange={handleChange}
 				onBlur={formik.handleBlur}
 				style={{ width: '100%' }}
 				loading={loading}

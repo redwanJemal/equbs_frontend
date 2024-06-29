@@ -2,13 +2,17 @@
 import React from 'react'
 import { Form, DatePicker } from 'antd'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 
 const DatePickerInput = ({ field, formik }) => {
-	// Convert formik value to moment object if it's a valid date string
-	const value = formik.values[field.name]
-		? moment(formik.values[field.name], 'YYYY-MM-DD')
-		: null
+	const value = formik.values[field.name] ? formik.values[field.name] : null
+
+	const onChange = (date) => {
+		if (date) {
+			formik.setFieldValue(field.name, date)
+		} else {
+			formik.setFieldValue(field.name, '')
+		}
+	}
 
 	return (
 		<Form.Item
@@ -28,11 +32,10 @@ const DatePickerInput = ({ field, formik }) => {
 				name={field.name}
 				placeholder={field.placeholder}
 				value={value}
-				onChange={(date, dateString) =>
-					formik.setFieldValue(field.name, dateString)
-				}
+				onChange={onChange}
 				onBlur={formik.handleBlur}
 				style={{ width: '100%' }}
+				needConfirm
 			/>
 		</Form.Item>
 	)

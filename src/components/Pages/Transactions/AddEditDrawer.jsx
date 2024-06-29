@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Drawer, message } from 'antd'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import moment from 'moment'
 import { TransactionFieldConfigs } from './config'
 import { closeDrawer } from '@/stores/drawerSlice'
 import {
@@ -51,7 +50,12 @@ const TransactionAddEditDrawer = () => {
 		initialValues: selectedTransaction || initialValues,
 		validationSchema: validationSchema,
 		onSubmit: async (values) => {
-			const payload = values
+			// Convert date to UTC before sending
+			const payload = {
+				...values,
+				date: values.date ? moment(values.date).utc().format() : '',
+			}
+
 			const action = isEditMode ? UpdateTransaction : CreateTransaction
 			const id = selectedTransaction?.id ? selectedTransaction.id : null
 
@@ -65,7 +69,7 @@ const TransactionAddEditDrawer = () => {
 				)
 			} else {
 				message.success(
-					`Succedded on ${isEditMode ? 'Updating' : 'Creating'} Transaction`
+					`Succeeded on ${isEditMode ? 'Updating' : 'Creating'} Transaction`
 				)
 				formik.resetForm()
 				dispatch(resetSelectedTransaction())

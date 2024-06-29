@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import React from 'react'
 import { Form, Button, Spin, Row, Col } from 'antd'
 import PropTypes from 'prop-types'
 import TextInput from './TextInput'
@@ -16,23 +14,48 @@ import CheckboxInput from './CheckboxInput'
 import PasswordInput from './PasswordInput'
 import MultiSelectApiInput from './MultiSelectApiInput'
 import withConditionalRendering from './withConditionalRendering'
+import withDisabledHandling from './withDisabledHandling'
 
 const deepEqual = (obj1, obj2) => JSON.stringify(obj1) === JSON.stringify(obj2)
 
 // Wrap field components with the HOC
-const WrappedTextInput = withConditionalRendering(TextInput)
-const WrappedNumberInput = withConditionalRendering(NumberInput)
-const WrappedSelectInput = withConditionalRendering(SelectInput)
-const WrappedSelectApiInput = withConditionalRendering(SelectApiInput)
-const WrappedMultiSelectApiInput = withConditionalRendering(MultiSelectApiInput)
-const WrappedKeyValueInput = withConditionalRendering(KeyValueInput)
-const WrappedTextAreaInput = withConditionalRendering(TextAreaInput)
-const WrappedRangePickerInput = withConditionalRendering(RangePickerInput)
-const WrappedTagInput = withConditionalRendering(TagInput)
-const WrappedDatePickerInput = withConditionalRendering(DatePickerInput)
-const WrappedRadioInput = withConditionalRendering(RadioInput)
-const WrappedCheckboxInput = withConditionalRendering(CheckboxInput)
-const WrappedPasswordInput = withConditionalRendering(PasswordInput)
+const WrappedTextInput = withDisabledHandling(
+	withConditionalRendering(TextInput)
+)
+const WrappedNumberInput = withDisabledHandling(
+	withConditionalRendering(NumberInput)
+)
+const WrappedSelectInput = withDisabledHandling(
+	withConditionalRendering(SelectInput)
+)
+const WrappedSelectApiInput = withDisabledHandling(
+	withConditionalRendering(SelectApiInput)
+)
+const WrappedMultiSelectApiInput = withDisabledHandling(
+	withConditionalRendering(MultiSelectApiInput)
+)
+const WrappedKeyValueInput = withDisabledHandling(
+	withConditionalRendering(KeyValueInput)
+)
+const WrappedTextAreaInput = withDisabledHandling(
+	withConditionalRendering(TextAreaInput)
+)
+const WrappedRangePickerInput = withDisabledHandling(
+	withConditionalRendering(RangePickerInput)
+)
+const WrappedTagInput = withDisabledHandling(withConditionalRendering(TagInput))
+const WrappedDatePickerInput = withDisabledHandling(
+	withConditionalRendering(DatePickerInput)
+)
+const WrappedRadioInput = withDisabledHandling(
+	withConditionalRendering(RadioInput)
+)
+const WrappedCheckboxInput = withDisabledHandling(
+	withConditionalRendering(CheckboxInput)
+)
+const WrappedPasswordInput = withDisabledHandling(
+	withConditionalRendering(PasswordInput)
+)
 
 const renderField = (field, formik) => {
 	switch (field.type) {

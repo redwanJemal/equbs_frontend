@@ -43,12 +43,10 @@ export const paymentModeEnum = (paymentMode) => {
  */
 export const transactionStatusEnum = (transactionStatus) => {
 	switch (transactionStatus) {
-		case 1:
+		case true:
 			return 'Approved'
-		case 2:
+		case false:
 			return 'Pending'
-		case 3:
-			return 'Rejected'
 		default:
 			return 'Unknown'
 	}

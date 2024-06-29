@@ -67,7 +67,12 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			),
 			timeline: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.timeline}
+					{item?.timeline ?? '-'}
+				</div>
+			),
+			remainingDays: (item) => (
+				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+					{item?.timeline - item.savedDays}
 				</div>
 			),
 		},
