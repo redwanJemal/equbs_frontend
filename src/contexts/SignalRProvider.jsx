@@ -19,10 +19,11 @@ export const SignalRProvider = ({ children }) => {
 	const notificationSound = new Audio(notificationSoundFile)
 
 	useEffect(() => {
+		const BASE_URL = import.meta.env.VITE_BASE_URL
 		const token = getToken()
 
 		const newConnection = new signalR.HubConnectionBuilder()
-			.withUrl('https://localhost:55296/chathub', {
+			.withUrl(`${BASE_URL}chathub`, {
 				accessTokenFactory: () => token,
 				withCredentials: true,
 			})

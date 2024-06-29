@@ -9,7 +9,7 @@ export const TransactionFieldConfigs = [
 		placeholder: 'Select Subscription',
 		label: 'Subscription',
 		required: true,
-		apiUrl: 'api/v1/equb-subscription',
+		apiUrl: 'api/v1/equb-subscription?isApproved=true',
 		validation: Yup.string().required('Subscription is required'),
 	},
 	{

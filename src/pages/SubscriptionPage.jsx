@@ -12,6 +12,7 @@ import DataTable from '@/components/DynamicTable/DataTable'
 import { subscriptionColumnsConfig } from '@/components/Pages/subscription/config'
 import SubscriptionAddEditDrawer from '@/components/Pages/subscription/SubscriptionAddEditDrawer'
 import SubscriptionTableView from '@/components/Pages/subscription/SubscriptionTableView'
+import { buildQueryString } from '@/utils/buildQueryString'
 
 const SubscriptionPage = () => {
 	const dispatch = useDispatch()
@@ -24,14 +25,17 @@ const SubscriptionPage = () => {
 	useEffect(() => {
 		// Dispatch the setSubscriptionQueryParameters action on initial load
 		dispatch(
-			setSubscriptionQueryParameters({
-				page: 1,
-				pageSize: 10,
-				filters: {
-					userId: userId,
-					isCompleted: false,
-				},
-			})
+			setSubscriptionQueryParameters(
+				buildQueryString({
+					page: 1,
+					pageSize: 10,
+					filters: {
+						userId: userId,
+						isApproved: false,
+						isCompleted: false,
+					},
+				})
+			)
 		)
 	}, [dispatch, userId])
 
