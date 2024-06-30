@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useMemo, useRef, useState, useEffect } from 'react'
@@ -41,6 +42,7 @@ const UserAddEditDrawer = () => {
 		isActive: '',
 		roles: [],
 		phoneNumber: '',
+		userName: '',
 	}
 
 	const validationSchema = buildValidationSchema(UserFieldConfigs)
@@ -75,6 +77,7 @@ const UserAddEditDrawer = () => {
 				isActive: selectedUser?.isActive ? 'true' : 'false',
 				roles: selectedUser?.roles || [],
 				phoneNumber: selectedUser?.phoneNumber || '',
+				userName: selectedUser?.userName || '',
 			})
 		}
 	}, [selectedUser])
