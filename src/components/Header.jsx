@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@/icons'
 import { Button, Layout, theme } from '@/components'
 
 const { Header: AntHeader } = Layout

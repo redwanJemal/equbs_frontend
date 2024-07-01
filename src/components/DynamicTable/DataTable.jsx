@@ -8,9 +8,8 @@ import {
 	SearchOutlined,
 	PlusCircleOutlined,
 	ExclamationCircleOutlined,
-	FilterOutlined,
 	SortAscendingOutlined,
-} from '@ant-design/icons'
+} from '@/icons'
 import Pagination from './CustomPagination'
 import ActionDropDown from './ActionDropDown'
 import { FaShieldAlt } from 'react-icons/fa'

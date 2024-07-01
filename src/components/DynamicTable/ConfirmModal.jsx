@@ -3,7 +3,7 @@
 
 import React from 'react'
 import { Modal } from '@/components'
-import { ExclamationCircleOutlined } from '@ant-design/icons'
+import { ExclamationCircleOutlined } from '@/icons'
 
 const ConfirmModal = ({ title, detail, confirm, cancel }) => {
 	return (

@@ -8,7 +8,7 @@ import {
 	TransactionOutlined,
 	MoneyCollectOutlined,
 	UserOutlined,
-} from '@ant-design/icons'
+} from '@/icons'
 
 const sampleData = [
 	{

@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { Dropdown, Menu, Checkbox, Button, Divider } from '@/components'
-import { FilterOutlined } from '@ant-design/icons'
+import { FilterOutlined } from '@/icons'
 
 const FilterComponent = ({
 	categories,

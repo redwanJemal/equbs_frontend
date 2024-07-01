@@ -9,7 +9,7 @@ import {
 	FolderAddOutlined,
 	TransactionOutlined,
 	UserOutlined,
-} from '@ant-design/icons'
+} from '@/icons'
 import { Link, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 

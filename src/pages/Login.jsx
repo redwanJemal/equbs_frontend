@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import { LockOutlined, UserOutlined } from '@ant-design/icons'
+import { LockOutlined, UserOutlined } from '@/icons'
 import { Form, Input, Button, Checkbox, message } from '@/components'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'

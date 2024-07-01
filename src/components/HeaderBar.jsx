@@ -17,7 +17,7 @@ import {
 	LogoutOutlined,
 	GlobalOutlined,
 	MessageOutlined,
-} from '@ant-design/icons'
+} from '@/icons'
 import ThemeToggleButton from './ThemeToggleButton'
 import LanguageMenu from './LanguageMenu'
 import { useNavigate } from 'react-router-dom'

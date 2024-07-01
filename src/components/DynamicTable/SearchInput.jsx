@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { Input, Button } from '@/components'
-import { SearchOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@/icons'
 
 const SearchInput = ({ onSearch, placeholder = 'Search ...' }) => {
 	const [searchValue, setSearchValue] = useState('')

@@ -1,12 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
-import {
-	EditOutlined,
-	EllipsisOutlined,
-	SettingOutlined,
-	UserOutlined,
-} from '@ant-design/icons'
+import { EllipsisOutlined, UserOutlined } from '@/icons'
 import { Avatar, Badge, Card, Dropdown, Menu } from '@/components'
 
 const UserCard = ({ user }) => {

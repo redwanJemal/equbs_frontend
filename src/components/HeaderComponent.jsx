@@ -7,7 +7,7 @@ import {
 	SunOutlined,
 	MoonOutlined,
 	GlobalOutlined,
-} from '@ant-design/icons'
+} from '@/icons'
 import { Dropdown, Layout, Tooltip } from '@/components'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '@/assets/react.svg'

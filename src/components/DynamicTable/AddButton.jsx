@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import { Button } from '@/components'
-import { PlusCircleOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined } from '@/icons'
 
 const AddButton = ({ setOpenDrawer, title }) => {
 	return (
