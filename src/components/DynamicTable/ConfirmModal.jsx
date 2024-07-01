@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 
 import React from 'react'
-import { Modal } from 'antd'
+import { Modal } from '@/components'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 const ConfirmModal = ({ title, detail, confirm, cancel }) => {

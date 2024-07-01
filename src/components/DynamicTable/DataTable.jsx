@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Input, Button, Drawer, Modal, Space, Dropdown } from 'antd'
+import { Input, Button, Modal, Space, Dropdown } from '@/components'
 import {
 	SearchOutlined,
 	PlusCircleOutlined,

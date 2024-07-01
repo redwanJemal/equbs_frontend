@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { Menu } from 'antd'
+import { Menu } from '@/components'
 
 const ActionDropDown = ({ actions, onActionSelected }) => {
 	const handleClick = (e) => {

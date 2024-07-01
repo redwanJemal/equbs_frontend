@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Button, Result } from 'antd'
+import { Button, Result } from '@/components'
 import { Link } from 'react-router-dom'
 const App = () => (
 	<Result

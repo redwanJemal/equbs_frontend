@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button } from '@/components'
 import PropTypes from 'prop-types'
 
 const KeyValueInput = ({ field, formik }) => {

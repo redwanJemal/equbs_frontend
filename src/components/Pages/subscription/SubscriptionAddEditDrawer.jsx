@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Drawer, message } from 'antd'
+import { Button, Drawer, message } from '@/components'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { SubscriptionFieldConfigs } from './config'

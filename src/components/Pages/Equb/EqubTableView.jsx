@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
-import { Button, Dropdown, Menu, Tooltip } from 'antd'
+import { Button, Tooltip } from '@/components'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
 
 const EqubTableView = ({ list, onDetail, onDelete, onReactivate }) => {

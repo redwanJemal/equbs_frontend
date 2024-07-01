@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, message } from 'antd'
+import { Modal, message } from '@/components'
 import { openDrawer } from '@/stores/drawerSlice'
 import {
 	ApproveTransaction,

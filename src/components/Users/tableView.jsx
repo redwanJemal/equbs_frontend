@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
-import { Button, Dropdown, Menu, Tooltip } from 'antd'
+import { Button, Tooltip } from '@/components'
 import { FaEdit } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { userStatusEnum } from '@/utils/enums'

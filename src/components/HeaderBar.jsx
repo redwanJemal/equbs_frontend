@@ -9,7 +9,7 @@ import {
 	Menu,
 	Badge,
 	theme as antTheme,
-} from 'antd'
+} from '@/components'
 import {
 	MenuUnfoldOutlined,
 	MenuFoldOutlined,

@@ -7,7 +7,7 @@ import {
 	Route,
 	Navigate,
 } from 'react-router-dom'
-import { Spin } from 'antd'
+import { Spin } from './components'
 import ResponsiveLayout from './layouts/DashboardLayout'
 import { getToken } from './auth'
 

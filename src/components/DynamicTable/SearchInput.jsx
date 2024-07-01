@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { Input, Button } from 'antd'
+import { Input, Button } from '@/components'
 import { SearchOutlined } from '@ant-design/icons'
 
 const SearchInput = ({ onSearch, placeholder = 'Search ...' }) => {

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Button, Tooltip } from 'antd'
+import { Button, Tooltip } from '@/components'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocale } from '@/locales'
 import { toggleTheme } from '@/stores/global.store'

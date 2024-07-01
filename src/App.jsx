@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react'
-import { ConfigProvider, Spin, theme as antdTheme } from 'antd'
+import { ConfigProvider, Spin, theme as antdTheme } from './components'
 import { IntlProvider } from 'react-intl'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'

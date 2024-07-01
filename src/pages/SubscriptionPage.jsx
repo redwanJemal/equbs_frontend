@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, message } from 'antd'
+import { Modal } from '@/components'
 import { openDrawer } from '@/stores/drawerSlice'
 import {
 	// GetSubscriptionById,

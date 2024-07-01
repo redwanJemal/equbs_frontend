@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { Form, Select } from 'antd'
+import { Form, Select } from '@/components'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 

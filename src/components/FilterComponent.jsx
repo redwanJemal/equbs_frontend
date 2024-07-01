@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { Dropdown, Menu, Checkbox, Button, Divider } from 'antd'
+import { Dropdown, Menu, Checkbox, Button, Divider } from '@/components'
 import { FilterOutlined } from '@ant-design/icons'
 
 const FilterComponent = ({

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { rotationTypeEnum } from '@/utils/enums'
-import { Button, Tooltip } from 'antd'
+import { Button, Tooltip } from '@/components'
 import moment from 'moment'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'

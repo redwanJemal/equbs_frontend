@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useMemo, useRef, useState, useEffect } from 'react'
-import { Form, Select, Spin, message, Drawer, Button } from 'antd'
+import { message, Drawer, Button } from '@/components'
 import PropTypes from 'prop-types'
 import debounce from 'lodash/debounce'
 import axiosInstance from '@/middlewares/axios'

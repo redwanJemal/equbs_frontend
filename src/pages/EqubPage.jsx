@@ -2,13 +2,14 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Modal, message } from 'antd'
 import { openDrawer } from '@/stores/drawerSlice'
 import { getEqubById, setEqubQueryParameters } from '@/stores/equbs'
 import { equbColumnsConfig } from '@/components/Pages/Equb/config'
 import EqubAddEditDrawer from '@/components/Pages/Equb/EqubAddEditDrawer'
 import DataTable from '@/components/DynamicTable/DataTable'
 import EqubTableView from '@/components/Pages/Equb/EqubTableView'
+
+import { message, Modal } from '@/components'
 
 const EqubPage = () => {
 	const dispatch = useDispatch()

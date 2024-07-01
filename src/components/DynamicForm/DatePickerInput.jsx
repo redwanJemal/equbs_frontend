@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Form, DatePicker } from 'antd'
+import { Form, DatePicker } from '@/components'
 import PropTypes from 'prop-types'
 
 const DatePickerInput = ({ field, formik }) => {

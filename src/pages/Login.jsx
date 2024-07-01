@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
-import { Form, Input, Button, Checkbox, message } from 'antd'
+import { Form, Input, Button, Checkbox, message } from '@/components'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Logo from '@/assets/equb.png'

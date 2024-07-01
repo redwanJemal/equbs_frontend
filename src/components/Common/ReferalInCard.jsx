@@ -7,8 +7,7 @@ import {
 	SettingOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
-import { Avatar, Badge, Card, Dropdown, Menu, Skeleton, Switch } from 'antd'
-const { Meta } = Card
+import { Avatar, Badge, Card, Dropdown, Menu } from '@/components'
 
 const UserCard = ({ user }) => {
 	const menu = (

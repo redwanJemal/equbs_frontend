@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Menu } from 'antd'
+import { Menu } from '@/components'
 import { useDispatch } from 'react-redux'
 import { useLocale } from '@/locales'
 import { setLocale } from '@/stores/global.store'

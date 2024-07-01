@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Layout, Card, Row, Col } from 'antd'
 import { useSelector } from 'react-redux'
 import TableView from '@/TableView'
+import { Layout, Col, Card } from '@/components'
 
 const { Content } = Layout
 

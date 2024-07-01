@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Form, Radio } from 'antd'
+import { Form, Radio } from '@/components'
 import PropTypes from 'prop-types'
 
 const RadioInput = ({ field, formik }) => (

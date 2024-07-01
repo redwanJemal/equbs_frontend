@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Layout } from 'antd'
+import { Layout } from '@/components'
 import Logo from '@/assets/moh.png'
 import { useSelector } from 'react-redux'
 import AppMenu from './AppMenu'

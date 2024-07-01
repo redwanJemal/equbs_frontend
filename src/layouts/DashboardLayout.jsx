@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
-import { Layout } from 'antd'
+import { Layout } from '@/components'
 import { useSelector } from 'react-redux'
 import HeaderBar from '@/components/HeaderBar'
 import ResponsiveDrawer from '@/components/ResponsiveDrawer'

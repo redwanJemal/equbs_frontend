@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { paymentModeEnum } from '@/utils/enums'
-import { Button, Tag, Tooltip } from 'antd'
+import { Button, Tag, Tooltip } from '@/components'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
 
 const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {

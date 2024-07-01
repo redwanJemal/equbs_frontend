@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Form, Checkbox } from 'antd'
+import { Form, Checkbox } from '@/components'
 import PropTypes from 'prop-types'
 
 const CheckboxInput = ({ field, formik }) => (

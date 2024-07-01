@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { Pagination } from 'antd'
+import { Pagination } from '@/components'
 
 const CustomPagination = ({ totalItems, itemsPerPage, onPaginate, meta }) => {
 	const handlePageChange = (page) => {

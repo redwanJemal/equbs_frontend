@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { Form, Select, message } from 'antd'
+import { Form, Select, message } from '@/components'
 import PropTypes from 'prop-types'
 import axiosInstance from '@/middlewares/axios'
 

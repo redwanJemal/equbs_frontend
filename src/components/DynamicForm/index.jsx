@@ -1,4 +1,4 @@
-import { Form, Button, Spin, Row, Col } from 'antd'
+import { Form, Button, Spin, Row, Col } from '@/components'
 import PropTypes from 'prop-types'
 import TextInput from './TextInput'
 import NumberInput from './NumberInput'

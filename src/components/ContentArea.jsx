@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import { Layout, Card, Row, Col } from 'antd'
+import { Layout, Card, Row, Col } from '@/components'
 import { useSelector } from 'react-redux'
 
 const { Content } = Layout
