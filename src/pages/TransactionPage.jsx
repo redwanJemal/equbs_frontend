@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Modal, message } from 'antd'
 import { openDrawer } from '@/stores/drawerSlice'
 import {
+	ApproveTransaction,
 	DeleteTransaction,
 	GetTransactionById,
 	ReactivateTransaction,
@@ -60,13 +61,13 @@ const TransactionPage = () => {
 		}
 	}
 
-	const handleReactivation = async (id) => {
-		console.log('reactivate transaction with id =>', id)
-		const response = await dispatch(ReactivateTransaction(id))
+	const handleApproval = async (id) => {
+		console.log('approve transaction with id =>', id)
+		const response = await dispatch(ApproveTransaction(id))
 		if (response?.payload?.status == 204) {
-			message.success('Transaction Reactivation success')
+			message.success('Transaction Approval success')
 		} else {
-			message.error('Transaction Reactivation Failed')
+			message.error('Transaction Approval Failed')
 		}
 		console.log(response)
 	}
@@ -80,12 +81,12 @@ const TransactionPage = () => {
 		})
 	}
 
-	const confirmReactivation = (id) => {
+	const confirmApproval = (id) => {
 		Modal.confirm({
-			title: 'Are you sure you want to reactivate this transaction?',
+			title: 'Are you sure you want to approve this transaction?',
 			content: 'This action cannot be undone.',
-			onOk: () => handleReactivation(id),
-			onCancel: () => console.log('Reactivation cancelled'),
+			onOk: () => handleApproval(id),
+			onCancel: () => console.log('Approve cancelled'),
 		})
 	}
 
@@ -144,7 +145,7 @@ const TransactionPage = () => {
 					list: transactions,
 					onDelete: confirmDeletion,
 					onDetail: handleDetail,
-					onReactivate: confirmReactivation,
+					onApprove: confirmApproval,
 				})}
 				columnsConfig={transactionColumnsConfig}
 				handleSearch={handleSearch}
