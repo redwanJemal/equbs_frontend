@@ -63,7 +63,7 @@ export const subscriptionSlice = createSlice({
 			})
 			.addCase(CreateSubscription.rejected, (state, action) => {
 				state.loading = 'idle'
-				state.error = action.error.message
+				state.error = action.payload.code
 			})
 			.addCase(UpdateSubscription.pending, (state) => {
 				state.loading = 'pending'

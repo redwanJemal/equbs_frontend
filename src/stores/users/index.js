@@ -36,7 +36,6 @@ const userSlice = createSlice({
 		},
 		setUserProfile(state, action) {
 			state.profile = action.payload
-			console.log(action.payload)
 			localStorage.setItem('user_info', JSON.stringify(action.payload)) // Save profile to local storage
 		},
 		userLogout(state) {

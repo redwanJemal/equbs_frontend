@@ -17,7 +17,6 @@ const SelectApiInput = ({ field, formik }) => {
 		setError(null)
 		try {
 			const response = await axiosInstance.get(field.apiUrl)
-			console.log(response)
 			if (Array.isArray(response.data.items)) {
 				setOptions(response.data.items)
 			} else {

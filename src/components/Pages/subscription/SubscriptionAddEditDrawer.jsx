@@ -60,10 +60,11 @@ const SubscriptionAddEditDrawer = () => {
 				payload.id = id
 			}
 
-			payload['startDate'] = moment(payload.startDate).utc().format()
-
 			const response = await dispatch(action({ id, payload }))
 			if (response.error) {
+				if (response?.payload?.code == 'Subscription.AlreadyExists') {
+					return message.error(`User has already subscribed to this equb`)
+				}
 				message.error(
 					`Failed to ${isEditMode ? 'Update' : 'Create'} Subscription`
 				)

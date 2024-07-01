@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import { rotationTypeEnum } from '@/utils/enums'
 import { Button, Tooltip } from 'antd'
+import moment from 'moment'
 import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
@@ -57,7 +58,7 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			),
 			startDate: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.startDate}
+					{moment(item?.startDate).format('YYYY-MM-DD')}
 				</div>
 			),
 			rotation: (item) => (
