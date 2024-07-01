@@ -4,7 +4,7 @@
 import { rotationTypeEnum } from '@/utils/enums'
 import { Button, Tooltip } from '@/components'
 import moment from 'moment'
-import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
+import { EditOutlined, PoweroffOutlined } from '@/icons'
 import { useNavigate } from 'react-router-dom'
 
 const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
@@ -33,7 +33,7 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 							type='primary'
 							shape='circle'
 							onClick={() => handleMenuClick(item, 'detail')}
-							icon={<FaEdit />}
+							icon={<EditOutlined />}
 						/>
 					</Tooltip>
 					<Tooltip title='Transactions'>
@@ -41,7 +41,7 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 							danger
 							shape='circle'
 							onClick={() => handleRedirect(item.id)}
-							icon={<FaPowerOff />}
+							icon={<PoweroffOutlined />}
 						/>
 					</Tooltip>
 				</div>

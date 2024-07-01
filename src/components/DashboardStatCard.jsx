@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { FaSpinner, FaUsers } from 'react-icons/fa' // Importing Font Awesome icon
+import { LoadingOutlined, TeamOutlined } from '@/icons' // Importing Font Awesome icon
 
 const DashboardStatCard = ({
 	title = 'Total Tenant',
 	totalCount = 32,
 	loading,
-	Icon = FaUsers,
+	Icon = TeamOutlined,
 }) => {
 	return (
 		<div className='flex flex-col gap-3 p-8 rounded-lg border border-gray-300 hover:border-2'>
@@ -16,7 +16,7 @@ const DashboardStatCard = ({
 				<div className='flex flex-col gap-2'>
 					<h4 className='text-color text-xl'>{title}</h4>
 					{loading === 'idle' && <h1 className='text-color'>{totalCount}</h1>}
-					{loading === 'pending' && <FaSpinner />}
+					{loading === 'pending' && <LoadingOutlined />}
 				</div>
 			</div>
 		</div>

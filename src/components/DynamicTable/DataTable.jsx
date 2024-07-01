@@ -12,7 +12,7 @@ import {
 } from '@/icons'
 import Pagination from './CustomPagination'
 import ActionDropDown from './ActionDropDown'
-import { FaShieldAlt } from 'react-icons/fa'
+import { SafetyOutlined } from '@/icons'
 import DynamicTable from '.'
 import FilterComponent from '../FilterComponent'
 
@@ -149,7 +149,7 @@ const DataTable = ({
 								/>
 							}
 						>
-							<Button icon={<FaShieldAlt />}>Actions</Button>
+							<Button icon={<SafetyOutlined />}>Actions</Button>
 						</Dropdown>
 					)}
 					{sortOptions && (

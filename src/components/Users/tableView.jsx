@@ -2,9 +2,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
-import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
 import { Button, Tooltip } from '@/components'
-import { FaEdit } from 'react-icons/fa'
+import { EditOutlined, DeleteOutlined } from '@/icons'
 import { useNavigate } from 'react-router-dom'
 import { userStatusEnum } from '@/utils/enums'
 
@@ -32,7 +31,7 @@ const tableView = ({ list, onDetail, onDelete }) => {
 							type='primary'
 							shape='circle'
 							onClick={() => handleMenuClick(item, 'detail')}
-							icon={<FaEdit />}
+							icon={<EditOutlined />}
 						/>
 					</Tooltip>
 					<Tooltip title='subscription'>
@@ -40,7 +39,7 @@ const tableView = ({ list, onDetail, onDelete }) => {
 							danger
 							shape='circle'
 							onClick={() => handleRedirect(item.id)}
-							icon={<BsTrash />}
+							icon={<DeleteOutlined />}
 						/>
 					</Tooltip>
 				</div>

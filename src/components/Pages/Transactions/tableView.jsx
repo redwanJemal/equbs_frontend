@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { paymentModeEnum } from '@/utils/enums'
 import { Button, Tag, Tooltip } from '@/components'
-import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
+import { EditOutlined, SyncOutlined } from '@/icons'
 
 const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
 	const handleMenuClick = (item, action) => {
@@ -38,7 +38,7 @@ const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
 								type='primary'
 								shape='circle'
 								onClick={() => handleMenuClick(item, 'detail')}
-								icon={<FaEdit />}
+								icon={<EditOutlined />}
 							/>
 						</Tooltip>
 						<Tooltip title='Approve'>
@@ -47,7 +47,7 @@ const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
 								type='primary'
 								shape='circle'
 								onClick={() => handleMenuClick(item, 'approve')}
-								icon={<FaSync />}
+								icon={<SyncOutlined />}
 							/>
 						</Tooltip>
 					</>

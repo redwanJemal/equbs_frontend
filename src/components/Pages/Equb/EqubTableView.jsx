@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { BsThreeDotsVertical, BsTrash } from 'react-icons/bs'
 import { Button, Tooltip } from '@/components'
-import { FaEdit, FaPowerOff, FaSync } from 'react-icons/fa'
+import { EditOutlined, PoweroffOutlined, SyncOutlined } from '@/icons'
 
 const EqubTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 	const handleMenuClick = (item, action) => {
@@ -25,7 +24,7 @@ const EqubTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 							type='primary'
 							shape='circle'
 							onClick={() => handleMenuClick(item, 'detail')}
-							icon={<FaEdit />}
+							icon={<EditOutlined />}
 						/>
 					</Tooltip>
 					{item.status == 1 ? (
@@ -34,7 +33,7 @@ const EqubTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 								danger
 								shape='circle'
 								onClick={() => handleMenuClick(item, 'delete')}
-								icon={<FaPowerOff />}
+								icon={<PoweroffOutlined />}
 							/>
 						</Tooltip>
 					) : (
@@ -44,7 +43,7 @@ const EqubTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 								type='primary'
 								shape='circle'
 								onClick={() => handleMenuClick(item, 'reactive')}
-								icon={<FaSync />}
+								icon={<SyncOutlined />}
 							/>
 						</Tooltip>
 					)}
