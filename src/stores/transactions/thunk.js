@@ -16,11 +16,8 @@ const CreateTransaction = createAsyncThunk(
 	async ({ payload }, { rejectWithValue }) => {
 		try {
 			const response = await api.createTransaction(payload)
-			const data = payload
+			const data = response.data
 			const status = response.status
-			if (status === 204 || status === 200) {
-				data['id'] = response.data
-			}
 			return { data, status }
 		} catch (err) {
 			return rejectWithValue(err.response.data)

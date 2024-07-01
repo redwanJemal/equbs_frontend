@@ -43,7 +43,7 @@ const TransactionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 								className='!bg-green-500 !border-green-500'
 								type='primary'
 								shape='circle'
-								onClick={() => handleMenuClick(item, 'reactive')}
+								onClick={() => handleMenuClick(item, 'approve')}
 								icon={<FaSync />}
 							/>
 						</Tooltip>
