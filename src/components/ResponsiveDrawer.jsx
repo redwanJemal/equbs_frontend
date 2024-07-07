@@ -3,7 +3,7 @@
 import React from 'react'
 import { Drawer } from '@/components'
 import { useSelector } from 'react-redux'
-import Logo from '@/assets/moh.png'
+import Logo from '@/assets/equb.png'
 import AppMenu from './AppMenu'
 import { useLocale } from '@/locales'
 

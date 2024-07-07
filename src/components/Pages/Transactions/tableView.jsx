@@ -3,6 +3,7 @@
 import { paymentModeEnum } from '@/utils/enums'
 import { Button, Tag, Tooltip } from '@/components'
 import { EditOutlined, SyncOutlined } from '@/icons'
+import moment from 'moment'
 
 const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
 	const handleMenuClick = (item, action) => {
@@ -59,7 +60,7 @@ const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
 			),
 			date: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.date}
+					{moment(item?.date).format('YYYY-MM-DD')}
 				</div>
 			),
 			amount: (item) => (

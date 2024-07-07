@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import { Layout } from '@/components'
-import Logo from '@/assets/moh.png'
+import Logo from '@/assets/equb.png'
 import { useSelector } from 'react-redux'
 import AppMenu from './AppMenu'
 import { useLocale } from '@/locales'
