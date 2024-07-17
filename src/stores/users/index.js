@@ -12,13 +12,10 @@ const initialState = {
 	detailLoading: false,
 	users: [],
 	selectedUser: null,
+	queryParameters: {},
 	highlightedRowId: null,
 	profile: null, // Add profile state
 	error: null,
-	meta: {
-		limit: 10,
-		page: 1,
-	},
 }
 
 const userSlice = createSlice({
@@ -26,7 +23,7 @@ const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUserQueryParameters(state, action) {
-			state.queryParameters = { ...state.queryParameters, ...action.payload }
+			state.queryParameters = action.payload
 		},
 		resetSelectedUser(state) {
 			state.selectedUser = null

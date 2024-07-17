@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { Button, Tooltip } from '@/components'
-import { EditOutlined, DeleteOutlined } from '@/icons'
+import { EditOutlined, DeleteOutlined, MoneyCollectOutlined } from '@/icons'
 import { useNavigate } from 'react-router-dom'
 import { userStatusEnum } from '@/utils/enums'
 
@@ -36,10 +36,9 @@ const tableView = ({ list, onDetail, onDelete }) => {
 					</Tooltip>
 					<Tooltip title='subscription'>
 						<Button
-							danger
 							shape='circle'
 							onClick={() => handleRedirect(item.id)}
-							icon={<DeleteOutlined />}
+							icon={<MoneyCollectOutlined />}
 						/>
 					</Tooltip>
 				</div>
@@ -49,11 +48,11 @@ const tableView = ({ list, onDetail, onDelete }) => {
 					{item?.fullName}
 				</div>
 			),
-			email: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[250px]'>
-					{item?.email}
-				</div>
-			),
+			// email: (item) => (
+			// 	<div className='table-row-color text-sm leading-[18px] w-[250px]'>
+			// 		{item?.email}
+			// 	</div>
+			// ),
 			phoneNumber: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
 					{item?.phoneNumber}

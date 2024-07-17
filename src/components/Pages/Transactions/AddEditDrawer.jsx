@@ -82,7 +82,7 @@ const TransactionAddEditDrawer = () => {
 		if (selectedTransaction) {
 			formik.setValues({
 				subscriptionId: selectedTransaction?.subscriptionId || '',
-				date: selectedTransaction?.date || '',
+				// date: selectedTransaction?.date || '',
 				amount: selectedTransaction?.amount || '',
 				mode: selectedTransaction?.mode || '',
 				transactionNumber: selectedTransaction?.transactionNumber || '',

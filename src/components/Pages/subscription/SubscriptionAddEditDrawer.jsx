@@ -43,6 +43,7 @@ const SubscriptionAddEditDrawer = () => {
 		startDate: '',
 		rotation: '',
 		timeline: 0,
+		receivingDayCount: '',
 		amount: 0,
 	}
 
@@ -87,6 +88,7 @@ const SubscriptionAddEditDrawer = () => {
 				startDate: selectedSubscription?.startDate || '',
 				rotation: selectedSubscription?.rotation || '',
 				timeline: selectedSubscription?.timeline || 0,
+				receivingDayCount: selectedSubscription?.receivingDayCount || 0,
 			})
 		}
 	}, [selectedSubscription])

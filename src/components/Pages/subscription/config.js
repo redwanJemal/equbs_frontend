@@ -59,6 +59,18 @@ export const SubscriptionFieldConfigs = [
 			.integer(),
 	},
 	{
+		id: 'receivingDayCount',
+		name: 'receivingDayCount',
+		type: 'number',
+		placeholder: 'Enter Day Count',
+		label: 'Receiving Day Count',
+		required: true,
+		validation: Yup.number()
+			.required('Receiving Day Count is required')
+			.positive()
+			.integer(),
+	},
+	{
 		id: 'amount',
 		name: 'amount',
 		type: 'number',
@@ -87,15 +99,15 @@ export const subscriptionColumnsConfig = [
 		responsive: ['sm', 'md', 'lg'],
 		width: 200,
 	},
+	// {
+	// 	title: 'Start Date',
+	// 	dataIndex: 'startDate',
+	// 	key: 'startDate',
+	// 	responsive: ['sm', 'md', 'lg'],
+	// 	width: 150,
+	// },
 	{
-		title: 'Start Date',
-		dataIndex: 'startDate',
-		key: 'startDate',
-		responsive: ['sm', 'md', 'lg'],
-		width: 150,
-	},
-	{
-		title: 'Rotation Type',
+		title: 'Rotation',
 		dataIndex: 'rotation',
 		key: 'rotation',
 		responsive: ['sm', 'md', 'lg'],
@@ -109,9 +121,16 @@ export const subscriptionColumnsConfig = [
 		width: 150,
 	},
 	{
-		title: 'Remaining Days',
+		title: 'Remaining',
 		dataIndex: 'remainingDays',
 		key: 'remainingDays',
+		responsive: ['sm', 'md', 'lg'],
+		width: 150,
+	},
+	{
+		title: 'Receiving',
+		dataIndex: 'receivingDayCount',
+		key: 'receivingDayCount',
 		responsive: ['sm', 'md', 'lg'],
 		width: 150,
 	},

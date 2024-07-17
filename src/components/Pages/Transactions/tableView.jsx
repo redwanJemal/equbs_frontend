@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { paymentModeEnum } from '@/utils/enums'
 import { Button, Tag, Tooltip } from '@/components'
-import { EditOutlined, SyncOutlined } from '@/icons'
+import { EditOutlined, CheckCircleOutlined } from '@/icons'
 import moment from 'moment'
 
 const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
@@ -34,28 +34,30 @@ const TransactionTableView = ({ list, onDetail, onDelete, onApprove }) => {
 				!item?.isApproved && (
 					<>
 						{' '}
-						<Tooltip title='Edit'>
-							<Button
-								type='primary'
-								shape='circle'
-								onClick={() => handleMenuClick(item, 'detail')}
-								icon={<EditOutlined />}
-							/>
-						</Tooltip>
-						<Tooltip title='Approve'>
-							<Button
-								className='!bg-green-500 !border-green-500'
-								type='primary'
-								shape='circle'
-								onClick={() => handleMenuClick(item, 'approve')}
-								icon={<SyncOutlined />}
-							/>
-						</Tooltip>
+						<div className='flex flex-row'>
+							<Tooltip title='Edit'>
+								<Button
+									type='primary'
+									shape='circle'
+									onClick={() => handleMenuClick(item, 'detail')}
+									icon={<EditOutlined />}
+								/>
+							</Tooltip>
+							<Tooltip title='Approve'>
+								<Button
+									className='!bg-green-500 !border-green-500'
+									type='primary'
+									shape='circle'
+									onClick={() => handleMenuClick(item, 'approve')}
+									icon={<CheckCircleOutlined />}
+								/>
+							</Tooltip>
+						</div>
 					</>
 				),
 			subscriptionName: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[350px]'>
-					{`${item.userFirstName} ${item.userLastName} => ${item.equbName}`}
+				<div className='table-row-color text-sm leading-[18px] w-[350px] overflow-hidden'>
+					{`${item.equbName}`}
 				</div>
 			),
 			date: (item) => (

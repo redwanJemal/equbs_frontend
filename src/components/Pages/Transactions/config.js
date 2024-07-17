@@ -121,6 +121,6 @@ export const transactionColumnsConfig = [
 		dataIndex: 'actions',
 		key: 'actions',
 		responsive: ['sm', 'md', 'lg'],
-		width: 80,
+		width: 120,
 	},
 ]

@@ -4,7 +4,7 @@
 import { rotationTypeEnum } from '@/utils/enums'
 import { Button, Tooltip } from '@/components'
 import moment from 'moment'
-import { EditOutlined, PoweroffOutlined } from '@/icons'
+import { EditOutlined, MoneyCollectOutlined, PoweroffOutlined } from '@/icons'
 import { useNavigate } from 'react-router-dom'
 
 const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
@@ -38,10 +38,9 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 					</Tooltip>
 					<Tooltip title='Transactions'>
 						<Button
-							danger
 							shape='circle'
 							onClick={() => handleRedirect(item.id)}
-							icon={<PoweroffOutlined />}
+							icon={<MoneyCollectOutlined />}
 						/>
 					</Tooltip>
 				</div>
@@ -56,11 +55,11 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 					{item?.equb?.equbName}
 				</div>
 			),
-			startDate: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{moment(item?.startDate).format('YYYY-MM-DD')}
-				</div>
-			),
+			// startDate: (item) => (
+			// 	<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+			// 		{moment(item?.startDate).format('YYYY-MM-DD')}
+			// 	</div>
+			// ),
 			rotation: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
 					{rotationTypeEnum(item?.rotation)}
@@ -74,6 +73,11 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 			remainingDays: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
 					{item?.timeline - item.savedDays}
+				</div>
+			),
+			receivingDayCount: (item) => (
+				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+					{item?.receivingDayCount - item.savedDays}
 				</div>
 			),
 		},

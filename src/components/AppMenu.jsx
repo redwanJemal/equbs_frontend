@@ -76,6 +76,12 @@ const AppMenu = ({ theme }) => {
 			<Menu.Item key='1' icon={<DashboardOutlined />}>
 				<Link to='/dashboard'>Dashboard</Link>
 			</Menu.Item>
+
+			{hasRole(['Administrator']) && (
+				<Menu.Item key='8' icon={<UserOutlined />}>
+					<Link to='/users'>User Management</Link>
+				</Menu.Item>
+			)}
 			{hasRole(['Administrator', 'Member']) && (
 				<Menu.Item key='13' icon={<MoneyCollectOutlined />}>
 					<Link to='/equbs'>Equbs</Link>
@@ -89,11 +95,6 @@ const AppMenu = ({ theme }) => {
 			{hasRole(['Administrator', 'Treasurer', 'Member']) && (
 				<Menu.Item key='3' icon={<TransactionOutlined />}>
 					<Link to='/transactions'>Subscription Transaction</Link>
-				</Menu.Item>
-			)}
-			{hasRole(['Administrator']) && (
-				<Menu.Item key='8' icon={<UserOutlined />}>
-					<Link to='/users'>User Management</Link>
 				</Menu.Item>
 			)}
 		</Menu>

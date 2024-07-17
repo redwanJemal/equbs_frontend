@@ -44,7 +44,8 @@ const TransactionPage = () => {
 		console.log('Detail for ID is:', id)
 		const response = await dispatch(GetTransactionById({ id }))
 		if (!response.error) {
-			setSelectedData(response.payload.data.data)
+			console.log(response?.payload?.data)
+			setSelectedData(response.payload.data)
 			dispatch(openDrawer())
 		} else {
 			message.error('Failed to get transaction detail')

@@ -16,6 +16,7 @@ export const buildQueryString = ({
 	})
 
 	if (sortBy) {
+		console.log('soring =>', sortBy)
 		queryString += `&sort_by=${sortBy}&sort_order=${sortOrder}`
 	}
 	if (term) {

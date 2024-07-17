@@ -55,7 +55,7 @@ const ApproveTransaction = createAsyncThunk(
 
 const GetTransactionById = createAsyncThunk(
 	'get:api/v1/transactions/{id}',
-	async (id, { rejectWithValue }) => {
+	async ({ id }, { rejectWithValue }) => {
 		try {
 			const response = await api.getTransactionById(id)
 			const data = response.data

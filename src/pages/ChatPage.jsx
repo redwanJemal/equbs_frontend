@@ -61,8 +61,6 @@ const ChatPage = () => {
 				connection
 					.start()
 					.then(() => {
-						console.log('Connected!')
-
 						connection.on('ReceiveMessage', (senderId, message) => {
 							console.log('Message received:', { senderId, message })
 							setMessages((messages) => [...messages, { senderId, message }])
@@ -79,7 +77,6 @@ const ChatPage = () => {
 	}, [connection])
 
 	const sendMessage = async () => {
-		console.log(connection)
 		if (
 			connection &&
 			connection.state === signalR.HubConnectionState.Connected

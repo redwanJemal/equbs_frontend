@@ -12,23 +12,16 @@ export const subscriptionSlice = createSlice({
 		subscriptions: [],
 		selectedSubscription: null,
 		highlightedRowId: null,
-		queryParameters: {
-			page: 1,
-			pageSize: 10,
-			filters: {},
-			term: '',
-			orderBy: '',
-			descending: false,
-		},
+		queryParameters: {},
 		error: null,
-		meta: {
-			limit: 10,
-			page: 1,
-		},
+		// meta: {
+		// 	limit: 10,
+		// 	page: 1,
+		// },
 	},
 	reducers: {
 		setSubscriptionQueryParameters(state, action) {
-			state.queryParameters = { ...state.queryParameters, ...action.payload }
+			state.queryParameters = action.payload
 		},
 		resetSelectedSubscription(state) {
 			state.selectedSubscription = null

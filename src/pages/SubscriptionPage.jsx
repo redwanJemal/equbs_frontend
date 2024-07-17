@@ -25,17 +25,14 @@ const SubscriptionPage = () => {
 	useEffect(() => {
 		// Dispatch the setSubscriptionQueryParameters action on initial load
 		dispatch(
-			setSubscriptionQueryParameters(
-				buildQueryString({
-					page: 1,
-					pageSize: 10,
-					filters: {
-						userId: userId,
-						isApproved: false,
-						isCompleted: false,
-					},
-				})
-			)
+			setSubscriptionQueryParameters({
+				page: 1,
+				pageSize: 10,
+				filters: {
+					userId: userId,
+					isCompleted: false,
+				},
+			})
 		)
 	}, [dispatch, userId])
 
