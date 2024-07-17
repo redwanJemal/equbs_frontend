@@ -20,7 +20,7 @@ export const buildQueryString = ({
 		queryString += `&sort_by=${sortBy}&sort_order=${sortOrder}`
 	}
 	if (term) {
-		queryString += `&term=${encodeURIComponent(term)}`
+		queryString += `&searchTerm=${encodeURIComponent(term)}`
 	}
 	if (include) {
 		queryString += `&include=${encodeURIComponent(include)}`
