@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { rotationTypeEnum } from '@/utils/enums'
-import { Button, Tooltip } from '@/components'
+import { Button, Popover, Tooltip } from '@/components'
 import moment from 'moment'
-import { EditOutlined, MoneyCollectOutlined, PoweroffOutlined } from '@/icons'
+import { EyeOutlined, EditOutlined, MoneyCollectOutlined } from '@/icons'
 import { useNavigate } from 'react-router-dom'
 
 const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
@@ -23,6 +23,49 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 		navigate(`/transactions?subscriptionId=${subscriptionId}`)
 	}
 
+	const Description = ({ lable, value }) => {
+		return (
+			<div className='flex'>
+				<span className='text-gray-500'>{lable}:</span>{' '}
+				<span className='ml-4 font-bold'>{value}</span>
+			</div>
+		)
+	}
+
+	const subscriptionDetail = (item) => {
+		return (
+			<div className='grid grid-cols-2 gap-2'>
+				<Description key={'name'} lable={'Name'} value={item?.user?.userName} />
+				<Description
+					key={'phone'}
+					lable={'Phone'}
+					value={item?.user?.userEmail}
+				/>
+				<Description key={'equb'} lable={'Equb'} value={item?.equb?.equbName} />
+				<Description
+					key={'timeLine'}
+					lable={'Time Line'}
+					value={item?.timeline}
+				/>
+				<Description
+					key={'rotation'}
+					lable={'Rotation'}
+					value={rotationTypeEnum(item?.rotation)}
+				/>
+				<Description key={'amount'} lable={'Amount'} value={item?.amount} />
+				<Description
+					key={'paid'}
+					lable={'Completed Payments'}
+					value={item?.savedDays}
+				/>
+				<Description
+					key={'payment'}
+					lable={'Payment Day Remaining'}
+					value={item?.receivingDayCount - item?.savedDays}
+				/>
+			</div>
+		)
+	}
 	return {
 		list: list,
 		theme: {
@@ -46,8 +89,18 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 				</div>
 			),
 			userName: (item) => (
-				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
+				<div className='flex flex-row justify-center items-center table-row-color text-sm leading-[18px] w-[150px]'>
 					{item?.user?.userName}
+					<div className='ml-2'>
+						<Popover
+							content={subscriptionDetail(item)}
+							title='Subscription Detail'
+						>
+							<span>
+								<EyeOutlined className='m-auto w-10 h-10' />
+							</span>
+						</Popover>
+					</div>
 				</div>
 			),
 			equbName: (item) => (
@@ -70,9 +123,9 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 					{item?.timeline ?? '-'}
 				</div>
 			),
-			remainingDays: (item) => (
+			paid: (item) => (
 				<div className='table-row-color text-sm leading-[18px] w-[150px]'>
-					{item?.timeline - item.savedDays}
+					{item.savedDays}
 				</div>
 			),
 			receivingDayCount: (item) => (

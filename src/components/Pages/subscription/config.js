@@ -63,7 +63,7 @@ export const SubscriptionFieldConfigs = [
 		name: 'receivingDayCount',
 		type: 'number',
 		placeholder: 'Enter Day Count',
-		label: 'Receiving Day Count',
+		label: 'Payment Day',
 		required: true,
 		validation: Yup.number()
 			.required('Receiving Day Count is required')
@@ -121,14 +121,14 @@ export const subscriptionColumnsConfig = [
 		width: 150,
 	},
 	{
-		title: 'Remaining',
-		dataIndex: 'remainingDays',
-		key: 'remainingDays',
+		title: 'Paid Days',
+		dataIndex: 'paid',
+		key: 'paid',
 		responsive: ['sm', 'md', 'lg'],
 		width: 150,
 	},
 	{
-		title: 'Receiving',
+		title: 'Payment Day',
 		dataIndex: 'receivingDayCount',
 		key: 'receivingDayCount',
 		responsive: ['sm', 'md', 'lg'],

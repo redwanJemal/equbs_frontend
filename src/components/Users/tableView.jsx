@@ -21,6 +21,7 @@ const tableView = ({ list, onDetail, onDelete }) => {
 	const handleRedirect = (userId) => {
 		navigate(`/subscription?userId=${userId}`)
 	}
+
 	return {
 		list: list,
 		theme: {
