@@ -1,9 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Drawer, message } from '@/components'
 import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import moment from 'moment'
 import { TransactionFieldConfigs } from './config'
 import { closeDrawer } from '@/stores/drawerSlice'
@@ -13,20 +13,13 @@ import {
 	resetSelectedTransaction,
 } from '@/stores/transactions'
 import DynamicFormComponent from '@/components/DynamicForm'
-
-// Function to build the validation schema from field configs
-const buildValidationSchema = (fieldConfigs) => {
-	const schema = fieldConfigs.reduce((acc, field) => {
-		if (field.validation) {
-			acc[field.name] = field.validation
-		}
-		return acc
-	}, {})
-	return Yup.object().shape(schema)
-}
+import { buildValidationSchema } from '@/utils/validationUtils'
 
 const TransactionAddEditDrawer = () => {
 	const loading = useSelector((state) => state.transactions.detailLoading)
+	const selectedSubscriptionId = useSelector(
+		(state) => state.transactions.selectedSubscriptionId
+	)
 	const selectedTransaction = useSelector(
 		(state) => state.transactions.selectedTransaction
 	)
@@ -36,7 +29,7 @@ const TransactionAddEditDrawer = () => {
 	const dispatch = useDispatch()
 
 	const initialValues = {
-		subscriptionId: '',
+		subscriptionId: selectedSubscriptionId || '',
 		date: '',
 		amount: '',
 		mode: '',
@@ -82,10 +75,10 @@ const TransactionAddEditDrawer = () => {
 		if (selectedTransaction) {
 			formik.setValues({
 				subscriptionId: selectedTransaction?.subscriptionId || '',
-				// date: selectedTransaction?.date || '',
 				amount: selectedTransaction?.amount || '',
 				mode: selectedTransaction?.mode || '',
 				transactionNumber: selectedTransaction?.transactionNumber || '',
+				date: moment(selectedTransaction?.date),
 				bankAccount: selectedTransaction?.bankAccount || '',
 			})
 		}
@@ -117,12 +110,22 @@ const TransactionAddEditDrawer = () => {
 			width={720}
 		>
 			<DynamicFormComponent
-				fieldConfigs={TransactionFieldConfigs}
+				fieldConfigs={TransactionFieldConfigs.filter(
+					(field) => field.id !== 'subscriptionId'
+				)} // Filter out subscriptionId field
 				formik={formik}
 				isLoading={loading === 'pending'}
 				actionButton={actionButton}
 				initialValues={selectedTransaction || initialValues}
 			/>
+			{selectedSubscriptionId && (
+				<input
+					type='hidden'
+					name='subscriptionId'
+					value={selectedSubscriptionId}
+					onChange={formik.handleChange}
+				/>
+			)}
 		</Drawer>
 	)
 }

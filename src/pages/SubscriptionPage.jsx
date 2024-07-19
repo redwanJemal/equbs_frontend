@@ -13,9 +13,12 @@ import { subscriptionColumnsConfig } from '@/components/Pages/subscription/confi
 import SubscriptionAddEditDrawer from '@/components/Pages/subscription/SubscriptionAddEditDrawer'
 import SubscriptionTableView from '@/components/Pages/subscription/SubscriptionTableView'
 import { buildQueryString } from '@/utils/buildQueryString'
+import { useNavigate } from 'react-router-dom'
 
 const SubscriptionPage = () => {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
+
 	const [selectedData, setSelectedData] = useState(null)
 
 	// Get userId from URL query parameters
@@ -117,6 +120,10 @@ const SubscriptionPage = () => {
 		console.log('Sort applied:', value)
 	}
 
+	const handleRedirect = (subscriptionId) => {
+		navigate(`/transactions?subscriptionId=${subscriptionId}`)
+	}
+
 	const handleSearch = (searchValue) => {
 		console.log('Search value:', searchValue)
 		dispatch(
@@ -145,7 +152,7 @@ const SubscriptionPage = () => {
 					list: subscriptions,
 					onDelete: confirmDeletion,
 					onDetail: handleDetail,
-					onReactivate: confirmReactivation,
+					onRedirect: handleRedirect,
 				})}
 				columnsConfig={subscriptionColumnsConfig}
 				handleSearch={handleSearch}

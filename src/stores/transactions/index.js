@@ -13,6 +13,7 @@ const initialState = {
 	loading: false,
 	transactions: [],
 	selectedTransaction: null,
+	selectedSubscriptionId: null,
 	highlightedRowId: null,
 	queryParameters: {
 		page: 1,
@@ -40,6 +41,12 @@ const transactionSlice = createSlice({
 		},
 		resetHighlightedRow(state) {
 			state.highlightedRowId = null
+		},
+		setSelectedTransactionId(state, action) {
+			state.selectedSubscriptionId = action.payload
+		},
+		resetSelectedTransactionId(state) {
+			state.selectedSubscriptionId = null
 		},
 	},
 	extraReducers: (builder) => {
@@ -147,6 +154,8 @@ export const {
 	setTransactionQueryParameters,
 	resetSelectedTransaction,
 	resetHighlightedRow,
+	setSelectedTransactionId,
+	resetSelectedTransactionId,
 } = transactionSlice.actions
 
 export {

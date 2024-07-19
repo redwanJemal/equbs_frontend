@@ -5,10 +5,14 @@ import { rotationTypeEnum } from '@/utils/enums'
 import { Button, Popover, Tooltip } from '@/components'
 import moment from 'moment'
 import { EyeOutlined, EditOutlined, MoneyCollectOutlined } from '@/icons'
-import { useNavigate } from 'react-router-dom'
 
-const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
-	const navigate = useNavigate()
+const SubscriptionTableView = ({
+	list,
+	onDetail,
+	onDelete,
+	onReactivate,
+	onRedirect,
+}) => {
 	const handleMenuClick = (item, action) => {
 		if (action === 'detail') {
 			onDetail(item?.id)
@@ -20,7 +24,7 @@ const SubscriptionTableView = ({ list, onDetail, onDelete, onReactivate }) => {
 	}
 
 	const handleRedirect = (subscriptionId) => {
-		navigate(`/transactions?subscriptionId=${subscriptionId}`)
+		onRedirect(subscriptionId)
 	}
 
 	const Description = ({ lable, value }) => {

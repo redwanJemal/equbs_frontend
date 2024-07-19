@@ -1,17 +1,17 @@
 import * as Yup from 'yup'
 
 export const TransactionFieldConfigs = [
-	{
-		id: 'subscriptionId',
-		name: 'subscriptionId',
-		type: 'select_api',
-		optionLabelKey: 'equbName', // Adjusted to show Equb name
-		placeholder: 'Select Subscription',
-		label: 'Subscription',
-		required: true,
-		apiUrl: 'api/v1/equb-subscription?isApproved=true',
-		validation: Yup.string().required('Subscription is required'),
-	},
+	// {
+	// 	id: 'subscriptionId',
+	// 	name: 'subscriptionId',
+	// 	type: 'select_api',
+	// 	optionLabelKey: 'equbName', // Adjusted to show Equb name
+	// 	placeholder: 'Select Subscription',
+	// 	label: 'Subscription',
+	// 	required: true,
+	// 	apiUrl: 'api/v1/equb-subscription?isApproved=true',
+	// 	validation: Yup.string().required('Subscription is required'),
+	// },
 	{
 		id: 'amount',
 		name: 'amount',
@@ -45,6 +45,7 @@ export const TransactionFieldConfigs = [
 		label: 'Transaction Number',
 		required: false,
 		validation: Yup.string().nullable(),
+		dependentOn: { field: 'mode', value: 2 },
 	},
 	{
 		id: 'bankAccount',
@@ -54,6 +55,7 @@ export const TransactionFieldConfigs = [
 		label: 'Bank Account',
 		required: false,
 		validation: Yup.string().nullable(),
+		dependentOn: { field: 'mode', value: 2 },
 	},
 	{
 		id: 'date',

@@ -27,7 +27,7 @@ export const EQUB_GET_BY_ID_URL = '/api/v1/equbs/{id}'
 const BASE_TRANSACTION_URL = 'api/v1/equb-transactions'
 
 export const TRANSACTION_CREATE_URL = `${BASE_TRANSACTION_URL}`
-export const TRANSACTION_UPDATE_URL = `${BASE_TRANSACTION_URL}/update`
+export const TRANSACTION_UPDATE_URL = `${BASE_TRANSACTION_URL}/`
 export const TRANSACTION_APPROVE_URL = `${BASE_TRANSACTION_URL}/{id}/approve`
 export const TRANSACTION_GET_ALL_URL = BASE_TRANSACTION_URL
 export const TRANSACTION_GET_BY_ID_URL = `${BASE_TRANSACTION_URL}/{id}`

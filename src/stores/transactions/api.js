@@ -23,7 +23,7 @@ const createTransaction = async (payload) => {
 }
 
 const updateTransaction = async (id, payload) => {
-	const url = TRANSACTION_UPDATE_URL.replace('{id}', id)
+	const url = TRANSACTION_UPDATE_URL + id
 	const response = await axiosInstance.put(url, payload)
 	return response
 }

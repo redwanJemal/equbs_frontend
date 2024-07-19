@@ -9,6 +9,8 @@ import {
 	DeleteTransaction,
 	GetTransactionById,
 	ReactivateTransaction,
+	resetSelectedTransactionId,
+	setSelectedTransactionId,
 	setTransactionQueryParameters,
 } from '@/stores/transactions'
 import DataTable from '@/components/DynamicTable/DataTable'
@@ -25,6 +27,11 @@ const TransactionPage = () => {
 
 	useEffect(() => {
 		// Dispatch the setTransactionQueryParameters action on initial load
+		if (subscriptionId) {
+			dispatch(setSelectedTransactionId(subscriptionId))
+		} else {
+			dispatch(resetSelectedTransactionId())
+		}
 		dispatch(
 			setTransactionQueryParameters({
 				page: 1,
@@ -177,6 +184,7 @@ const TransactionPage = () => {
 				title={'Transactions'}
 				highlightedRowId={highlightedRowId}
 				DrawerComponent={TransactionAddEditDrawer}
+				showAdd={subscriptionId}
 			/>
 		</>
 	)
